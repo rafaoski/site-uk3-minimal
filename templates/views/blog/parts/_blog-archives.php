@@ -4,6 +4,9 @@
 $y = input()->urlSegment(2);
 $m = input()->urlSegment(3);
 
+// Information about the actual displayed archives ( date )
+$textDate = sprintf(setting('archives-date'),$y, $m );
+
 // Date to search archives
 $date_s = "$y/$m/01";
 $date_e = "$y/$m/31";
@@ -18,17 +21,18 @@ if(strlen(input()->urlSegment3) && count($items) == 0) {
 
 }
 
-// If no found any items
+// If no found any items show all posts
 if( count($items) == 0 ) {
 
 // Find All items to show in archive page /archives/ 
-$items = pages()->find("template=blog-post, sort=-date, limit=12");
+  $items = pages()->find("template=blog-post, sort=-date, limit=12");
 
-// Get year for archives date text (<h1 id='archive-date'>Y</h1>)
-$y =  wireDate('Y', $items->first()->getUnformatted("date"));
-
-// Get montch for archives date text (<h1 id='archive-date'>Date: Y/m</h1>)
-$m =  wireDate('m', $items->first()->getUnformatted("date"));
+// Get first date
+  $first_date =  wireDate('Y/m/d', $items->first()->getUnformatted("date"));
+// Get last date
+  $last_date =  wireDate('Y/m/d', $items->last()->getUnformatted("date"));
+// Show Information about the actual displayed archives ( date )
+  $textDate = sprintf(setting('see-archives'), $first_date, $last_date );
 
 }
 
@@ -80,7 +84,9 @@ if(strlen(input()->urlSegment3)) {
 
 <div id='content-body'>
 
-<form action="./">
+<h3 id='archive-date'><?= $textDate ?></h3>
+
+<form action="./" class='uk-margin'>
 
   <select style='background:#bab5af; color:black;' class="uk-select" name='form'
           onchange='location = this.options[this.selectedIndex].value;'>
@@ -92,9 +98,6 @@ if(strlen(input()->urlSegment3)) {
   </select>
 
 </form>
-
-
-<h1 id='archive-date'><?= sprintf(setting('archives-date'),$y, $m ) ?></h1>
 
 <?php // Pagination
   echo ukPagination($items, ['baseUrl' => "./"]);

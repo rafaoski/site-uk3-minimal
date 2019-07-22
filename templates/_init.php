@@ -71,12 +71,11 @@ setting([
     'also-like' => __('You might also like:'),
     'select-archives' => __('Select Archives'),
     'archives-date' => __('Date: %s/%s'),
-
-// The translation ("authors") is important for the pages of the authors of the blog. Adds a clean URL segment ...
-    'authors' => __('Authors'), // Do not delete this translation !!!
+    'see-archives' => __('See archives from %s to %s'),
 // The translation ("archives") is important for the pages of the archives of the blog. Adds a clean URL segment ...
     'archives' => __('Archives'), // Do not delete this translation !!!
-
+// The translation ("authors") is important for the pages of the authors of the blog. Adds a clean URL segment ...
+    'authors' => __('Authors'), // Do not delete this translation !!!
     'rss-title' => __('Recent Posts'),
     'rss-description' => __('The most recent pages updated on my site'),
     'max-note' => __('%d more (not shown)', __FILE__),
