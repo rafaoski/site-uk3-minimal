@@ -1,0 +1,187 @@
+/* ALL CONTENT */
+body {
+  background: no-repeat center center fixed;
+  /* background-size: contain; */
+  background-size: cover;
+}
+
+/* UIKIT ELEMENTS */
+.uk-card-primary {
+  background: #273241;
+}
+
+/* LOGO */
+.logo {
+  width: 90px;
+}
+
+/* SITE NAME */
+.site-name {
+  letter-spacing: 3px;
+}
+
+/* TOP NAVIGATION */
+nav.nav-scroll {
+  position: relative;
+  z-index: 2;
+  height: 2rem;
+  box-sizing: border-box;
+  overflow-y: hidden;
+  padding: 1rem;
+  border-top: 1px solid rgba(0,0,0,0.075);
+  line-height: 1em;
+}
+nav.nav-scroll > ul {
+  overflow-x: auto;
+  text-align: center;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 1rem;
+}
+nav.nav-scroll > ul > li > a {
+  letter-spacing: 3px;
+}
+
+/* OFFCANVAS NAVIGATION */
+#offcanvas-toggle {
+  width: 34px;
+  height: 34px;
+  padding: 10px;
+  z-index: 1000;
+}
+#off-overlay .uk-offcanvas-bar {
+  background: #000000eb;
+}
+
+/* CONTENT BODY */
+.content-body {
+  font-size: 18px;
+  letter-spacing: 2px;
+}
+.content-body li {
+  line-height: 2;
+}
+
+/* BLOG */
+.blog-title {
+  font-size: 28px
+}
+
+/* BASIC PAGE */
+.page-child li {
+  padding: 10px;
+}
+
+/* FOOTER */
+footer.footer {
+  background: #000000d6;
+}
+footer .copy-text {
+  letter-spacing: 3px;
+  line-height: 2;
+}
+
+/* SEARCH FORM */
+.search-f .uk-label {
+  background: #3d3d3df0;
+}
+
+/****************************************************************
+ * Bodycopy text and images
+ *
+ * These styles are good to have on any ProcessWire site
+ *
+ */
+
+.align_left {
+	/* for images placed in rich text editor */
+	float: left;
+	margin: 0 1em 0.5em 0;
+	position: relative;
+	top: 0.5em;
+	max-width: 50%;
+}
+
+.align_right {
+	/* for images placed in rich text editor */
+	float: right;
+	margin: 0 0 0.5em 1em;
+	max-width: 50%;
+}
+
+.align_center {
+	/* for images placed in rich text editor */
+	display: block;
+	margin: 1em auto;
+	position: relative;
+	top: 0.5em;
+}
+
+figure {
+	/* figure for image that has a caption */
+	display: table;
+	margin: 1em 0;
+}
+
+figure figcaption {
+	/* display caption text below image contained to image width */
+	display: table-caption;
+	caption-side: bottom;
+	font-size: 13px;
+	line-height: 1.4em;
+	margin-top: 5px;
+	color: #777;
+}
+
+@media screen and (max-width: 1024px) {
+
+/* LOGO */
+.logo {
+  width: 50px;
+}
+
+/* SITE NAME */
+.site-name .uk-heading-small {
+  font-size: 24px;
+}
+
+/* SOCIAL PROFILES */
+.social-icon {
+  width: 30px;
+}
+
+/* BLOG */
+.blog-title {
+  font-size: 20px
+}
+.blog-post-icon {
+  width: 25px;
+  height: 25px;
+}
+.blog-info .uk-card-blog {
+  background: #2120202e;
+}
+.blog-links .uk-flex {
+  justify-content: center;
+}
+.blog-links .uk-card-small {
+  padding: 10px 13px;
+}
+
+/* These styles are good to have on any ProcessWire site */
+
+.align_left, .align_right, .align_center {
+  /* display images in center rather than aligned */
+  display: block;
+  float: none;
+  margin: 1em auto;
+  max-width: 100%;
+}
+
+figure,
+  figure figcaption {
+  /* let figcaption display as wide as needed below image */
+    display: block;
+    text-align: center;
+  }
+}
