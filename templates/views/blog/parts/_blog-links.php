@@ -23,31 +23,35 @@ $blogIcons = ['hashtag','tag','user', 'forward','copy','rss']
 ?>
 
 <!-- BLOG LINKS -->
-<div class='blog-links uk-container uk-container-expand'>
-  <div class='uk-flex uk-flex-wrap uk-grid-small' data-uk-grid>
-    <?php foreach ($blogLinks as $key => $link):
-    $dataTurbolinks = $blogIcons[$key] == 'rss' ?  " data-turbolinks='false'" : '';
-    // link url / tooltip / title / aria-label
-    if($blogIcons[$key] == 'user') {
-        $title = setting('authors');
-        $link_url = $link->url . "$authorsUrlSlug/";
-      } else if($blogIcons[$key] == 'copy') {
-        $title = setting('archives');
-        $link_url = $link->url . "$archivesUrlSlug/";
-      } else {
-        $title = $link->title;
-        $link_url = $link->url;
-      }
-    ?>
-    <div>
-      <a class='uk-link-reset' href='<?= $link_url ?>' aria-label="<?= $title ?>" data-uk-tooltip="<?= $title ?>"<?= $dataTurbolinks ?>>
-        <div class='uk-card uk-card-body uk-card-default uk-card-small uk-card-hover'>
-          <!-- <span><?php // echo $title ?></span> -->
-            <span class='uk-icon-button' data-uk-icon="icon: <?= $blogIcons[$key] ?>; ratio: 1.3"></span>
-        </div>
-      </a>
-    </div>
-    <?php endforeach; ?>
+<div id='blog-links' class="blog-links uk-overflow-auto">
+  <div class='links-content'>
+
+    <ul class="blog-links uk-subnav uk-flex uk-flex-nowrap">
+      <?php foreach ($blogLinks as $key => $link):
+        $dataTurbolinks = $blogIcons[$key] == 'rss' ?  " data-turbolinks='false'" : '';
+        // link url / tooltip / title / aria-label
+         if($blogIcons[$key] == 'user') {
+             $title = setting('authors');
+             $link_url = $link->url . "$authorsUrlSlug/";
+           } else if($blogIcons[$key] == 'copy') {
+             $title = setting('archives');
+             $link_url = $link->url . "$archivesUrlSlug/";
+           } else {
+             $title = $link->title;
+             $link_url = $link->url;
+           }
+      ?>
+      <li>
+        <a class='uk-link-reset' href='<?= $link_url ?>' aria-label="<?= $title ?>" data-uk-tooltip="<?= $title ?>"<?= $dataTurbolinks ?>>
+          <div class='uk-card uk-card-body uk-card-default uk-card-small uk-card-hover'>
+            <!-- <span><?php // echo $title ?></span> -->
+              <span class='uk-icon-button' data-uk-icon="icon: <?= $blogIcons[$key] ?>; ratio: 1.3"></span>
+          </div>
+        </a>
+      </li>
+      <?php endforeach; ?>
+    </ul>
+
   </div>
 </div>
 <!-- /BLOG LINKS -->

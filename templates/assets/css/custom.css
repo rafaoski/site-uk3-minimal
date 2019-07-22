@@ -20,28 +20,6 @@ body {
   letter-spacing: 3px;
 }
 
-/* TOP NAVIGATION */
-nav.nav-scroll {
-  position: relative;
-  z-index: 2;
-  height: 2rem;
-  box-sizing: border-box;
-  overflow-y: hidden;
-  padding: 1rem;
-  border-top: 1px solid rgba(0,0,0,0.075);
-  line-height: 1em;
-}
-nav.nav-scroll > ul {
-  overflow-x: auto;
-  text-align: center;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: 1rem;
-}
-nav.nav-scroll > ul > li > a {
-  letter-spacing: 3px;
-}
-
 /* OFFCANVAS NAVIGATION */
 #offcanvas-toggle {
   width: 34px;

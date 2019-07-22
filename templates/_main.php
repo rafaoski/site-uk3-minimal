@@ -82,7 +82,7 @@ if ( setting('background-image') && $img ) {
 <!-- /SITE INFO -->
 
 <!-- BREADCRUMB -->
-<div id='bredcrumb' class='breadcrumb uk-container uk-margin-small-top' data-pw-optional>
+<div id='bredcrumb' class='breadcrumb uk-container' data-pw-optional>
   <div class='uk-float-right'>
     <?php if(page()->parent->id > setting('home')->id) echo ukBreadcrumb(page(),
           [
@@ -95,7 +95,7 @@ if ( setting('background-image') && $img ) {
 <!-- /BREADCRUMB -->
 
 <!-- NAVIGATION  -->
-<nav id='nav' class="nav uk-container uk-margin-small-top nav-scroll">
+<nav id='nav' class="nav uk-container uk-overflow-auto uk-margin-small-top">
   <?= files()->render('views/template-parts/_navigation.php') ?>
 </nav>
 <!-- /NAVIGATION  -->
@@ -105,7 +105,7 @@ if ( setting('background-image') && $img ) {
   <?php // -- Render Hero
     echo files()->render('views/template-parts/_hero-content.php',
         [
-          'img' => $img, 
+          'img' => $img,
           'img_alt' => $img_alt
         ])
   ?>
