@@ -17,16 +17,14 @@ if( !count($tags) ) {
 <!-- BLOG POSTS -->
 <div class='uk-flex uk-flex-wrap uk-flex-around' data-uk-grid>
   <?php foreach($tags as $tag): ?>
+    <?php if (count($tag->references())): ?>
     <div>
-          <a href='<?=$tag->url?>' class='uk-inline'>
-          <h3><?=$tag->title?>
-            <span style='border-top: 3px solid black;
-                  border-left: 3px solid black; border-radius: 50%; padding: 5px 15px;'
-                  class='count-category'><?=count($tag->references())?>
-            </span>
-          </h3>
+        <a class='uk-button uk-button uk-button-text' href='<?=$tag->url?>'>
+            <?=$tag->title?>
+            <span class='count-category uk-badge'><?= count($tag->references()) ?></span>
         </a>
     </div>
+    <?php endif; ?>
   <?php endforeach; ?>
 </div>
 <!-- /BLOG POSTS -->

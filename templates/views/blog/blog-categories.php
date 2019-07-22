@@ -17,16 +17,14 @@ if( !count($categories) ) {
 <!-- BLOG POSTS -->
 <div class='uk-flex uk-flex-wrap uk-flex-around' data-uk-grid>
 <?php foreach($categories as $category): ?>
-  <a href='<?=$category->url?>'>
+  <?php if (count($category->references())): ?>
+  <a class='uk-link-reset' href='<?=$category->url?>'>
     <div class='uk-card uk-card-default uk-card-hover uk-card-body'>
-          <h3><?=$category->title?>
-            <span style='border-top: 3px solid black;
-                  border-left: 3px solid black; border-radius: 50%; padding: 5px 15px;'
-                  class='count-category'><?=count($category->references())?>
-            </span>
-          </h3>
+      <h3 class="uk-card-title"><?=$category->title?>
+      <span class='count-category uk-badge'><?= count($category->references()) ?></span></h3>
     </div>
   </a>
+  <?php endif; ?>
 <?php endforeach; ?>
 </div>
 <!-- /BLOG POSTS -->
