@@ -10,11 +10,11 @@ $defaults = [
   'authors_url_slug' => sanitizer()->pageName(setting('authors')),
 // User Nick Name
   'nick_name' => $item->createdUser->nick_name,
-// User slug to page  
+// User slug to page
   'nick_pagename' => sanitizer()->pageName($item->createdUser->nick_pagename, true),
-// Unformatted date from fields ( date )  
+// Unformatted date from fields ( date )
   'date' => wireDate('Y/m/d', $item->getUnformatted("date")),
-  'date_archives_url' => pages()->get("template=blog")->url . 
+  'date_archives_url' => pages()->get("template=blog")->url .
           sanitizer()->pageName(setting('archives')) . '/' . wireDate('Y/m/', $item->getUnformatted("date")),
 ];
 // Merge Options
@@ -37,12 +37,12 @@ $options = array_merge($defaults, $options);
       <?php endif; ?>
 
       <p class="uk-article-meta">
-          
+
             <a class='uk-button uk-button-text' href="<?= $options['date_archives_url'] ?>">
-              <span data-uk-icon="icon: calendar"></span> 
+              <span data-uk-icon="icon: calendar"></span>
               <?= $options['date'] ?>
             </a>
-          
+
           <!-- <span data-uk-icon="icon: future"></span> Takes 7 min reading. -->
 
           <?php if($options['nick_pagename']): ?> |
@@ -101,7 +101,8 @@ $options = array_merge($defaults, $options);
 
     <?php else: ?>
       <p><?= $item->render('body', 'text-medium') ?></p>
-      <a href="<?= $item->url ?>" title="<?= setting('read-more') ?>" class="uk-button uk-button-primary uk-button-small uk-text-uppercase">
+      <a href="<?= $item->url ?>" title="<?= setting('read-more') ?>" class="uk-button uk-button-text uk-text-large">
+        <?= ukIcon('arrow-right') ?>
         <?= setting('read-more') ?>
       </a>
       <hr>
