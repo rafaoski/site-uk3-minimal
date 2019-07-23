@@ -789,6 +789,7 @@ function ukDescriptionListPages(PageArray $items, $options = array()) {
  *  - `moreIcon` (string): Icon to use for more link in summarized blog post (default=more).
  *  - `categoryIcon` (string): Icon to use for identification of categories in blog header (default=hashtag).
  *  - `bylineText` (string): Template for byline (default=“Posted by %1$s on %2$s”).
+ *  - `comments` (bool): Show Comments if setting('comments') == true.
  * @return string
  *
  */
@@ -801,6 +802,7 @@ function ukBlogPost(Page $page, $options = array()) {
 		'moreText' => setting('read-more'),
 		'categoryIcon' => 'hashtag',
 		'bylineText' => setting('byline-text'),
+		'comments' => setting('comments')
 	);
 
 	$options = _ukMergeOptions($defaults, $options);
@@ -812,7 +814,12 @@ function ukBlogPost(Page $page, $options = array()) {
 	$moreIcon = ukIcon($options['moreIcon']);
 	$categoryIcon = ukIcon($options['categoryIcon']);
 	$n = $page->get('comments')->count();
-	$numComments = $n ? "<a href='$page->url#comments'>" . ukIcon('comments') . " $n</a>" : "";
+	
+	if($options['comments']) {
+		$numComments = $n ? "<a href='$page->url#comments'>" . ukIcon('comments') . " $n</a>" : "";
+	} else {
+		$numComments = '';
+	}
 
 	if($options['summarize'] === null) {
 		// auto-detect: summarize if current page is not the same as the blog post
@@ -853,8 +860,6 @@ function ukBlogPost(Page $page, $options = array()) {
 				</span>
 				<span class='categories'>
 					$categories
-				</span>
-				<span class='num-comments uk-margin-small-left uk-text-muted'>
 					$numComments
 				</span>
 			</p>
