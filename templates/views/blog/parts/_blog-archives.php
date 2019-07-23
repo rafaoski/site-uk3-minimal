@@ -3,11 +3,8 @@
 // reset variables
 $textDate = $date = '';
 
-// archives url slug
-$archiveSlug = $sanitizer->pageName(input()->urlSegment1);
-
 // archive text
-$archiveText = $archiveSlug;
+$archiveText = $archivesUrlSlug;
 
 // item year
 $y = $sanitizer->date(input()->urlSegment2);
@@ -34,7 +31,7 @@ $items = pages()->find("template=blog-post, date>=$date_s, date<=$date_e, sort=-
 $iconReply = ukIcon('reply', ['ratio' => '2.5', 'class' => 'blog-post-icon']);
 
 // link to archives page
-$archiveText = "<a href='" . page()->url . $archiveSlug . "/'>" . $archiveSlug . ' ' . $iconReply . "</a>";
+$archiveText = "<a href='" . page()->url . $archivesUrlSlug . "/'>" . $archivesUrlSlug . ' ' . $iconReply . "</a>";
 
 // if no items found
   if( count($items) == 0 ) {
@@ -56,7 +53,7 @@ $items = pages()->find("template=blog-post, sort=-date, limit=12");
     <meta name="robots" content="noindex,follow" />
 </head>
 
-<title id='title'><?= strtoupper( $archiveSlug ) . $date ?></title>
+<title id='title'><?= strtoupper( $archivesUrlSlug ) . $date ?></title>
 
 <meta name="description" id='description' data-pw-remove/>
 
@@ -71,9 +68,9 @@ $items = pages()->find("template=blog-post, sort=-date, limit=12");
             <li><a href="<?= $key->url ?>"><?= $key->title ?></a></li>
             <?php endforeach; ?>
             <?php if( !strlen(input()->urlSegment3) ): ?>
-            <li><span><?= $archiveSlug ?></li></span>
+            <li><span><?= $archivesUrlSlug ?></li></span>
             <?php else: ?>
-            <li><a href='<?= page()->url . $archiveSlug ?>/'><?= sanitizer()->pascalCase($archiveSlug) ?></a>
+            <li><a href='<?= page()->url . $archivesUrlSlug ?>/'><?= sanitizer()->pascalCase($archivesUrlSlug) ?></a>
             <li><span><?= "$y/$m" ?></span></li>
             <?php endif; ?>
         </ul>
