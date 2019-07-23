@@ -19,15 +19,15 @@ $date_e = "$y/$m/31";
 if( strlen(input()->urlSegment2) ) {
 
 // Show info about archive date
-$textDate = '<h1>' . sprintf(setting('archives-date'), $y, $m) . '</h1>';
+$textDate = '<h2>' . sprintf(setting('archives-date'), $y, $m) . '</h2>';
 
-// title seo date  
+// title seo date
 $date =  " - $y/$m";
 
 // find items
 $items = pages()->find("template=blog-post, date>=$date_s, date<=$date_e, sort=-date, limit=12");
 
-// uikit icon  
+// uikit icon
 $iconReply = ukIcon('reply', ['ratio' => '2.5', 'class' => 'blog-post-icon']);
 
 // link to archives page
@@ -40,7 +40,7 @@ $archiveText = "<a href='" . page()->url . $archivesUrlSlug . "/'>" . $archivesU
 
   }
 
-// find all items 
+// find all items
 } else {
 
 $items = pages()->find("template=blog-post, sort=-date, limit=12");
@@ -79,20 +79,30 @@ $items = pages()->find("template=blog-post, sort=-date, limit=12");
 
 <div id='content-body'>
 
-<?= $textDate ?>
+<div class='uk-flex uk-flex-wrap uk-flex-middle' data-uk-grid>
 
-<form action="./" class='uk-margin'>
+  <?= $textDate ?>
 
-  <select style='background:#bab5af; color:black;' class="uk-select" name='form'
-          onchange='location = this.options[this.selectedIndex].value;'>
+  <form action="./">
 
-  <option value='#'><?= setting('select-archives') ?></option>
+    <div class="uk-margin">
 
-    <?= blogArchive() ?>
+      <select class="uk-select uk-form-width-medium uk-form-large" name='form'
+              onchange='location = this.options[this.selectedIndex].value;'>
 
-  </select>
+      <option class='uk-text-large' value='#'>
 
-</form>
+        <?= setting('select-archives') ?></option>
+
+        <?= blogArchive() ?>
+
+      </select>
+
+    </div>
+
+  </form>
+
+</div>
 
 <?php // pagination
   echo ukPagination($items, ['baseUrl' => "./"]);
@@ -108,7 +118,7 @@ foreach ($items as $item) {
 </div>
 
 <?php // pagination
-  echo ukPagination($items, ['baseUrl' => "./"]); 
+  echo ukPagination($items, ['baseUrl' => "./"]);
 ?>
 
 </div>
