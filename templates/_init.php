@@ -41,7 +41,7 @@ setting([
     ]),
 // Get Scripts
     'js-files' => WireArray([
-        urls('templates') . 'assets/js/turbolinks.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.2.0/turbolinks.js',
         urls()->uikit_js,
         urls()->uikit_icons,
     ]),
