@@ -101,7 +101,7 @@ if ( setting('background-image') && $img ) {
 <!-- /NAVIGATION  -->
 
 <!-- HERO -->
-<div id='hero' class='hero uk-container uk-container-expand uk-margin-medium-top uk-margin-medium-bottom'>
+<div id='hero' class='hero uk-container uk-container-expand'>
   <?php // -- Render Hero
     echo files()->render('views/template-parts/_hero-content.php',
         [

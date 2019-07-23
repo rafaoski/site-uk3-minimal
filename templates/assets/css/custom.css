@@ -139,12 +139,6 @@ figure figcaption {
 .blog-info .uk-card-blog {
   background: #2120202e;
 }
-.blog-links .uk-flex {
-  justify-content: center;
-}
-.blog-links .uk-card-small {
-  padding: 10px 13px;
-}
 
 /* These styles are good to have on any ProcessWire site */
 
