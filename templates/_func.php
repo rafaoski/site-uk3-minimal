@@ -191,7 +191,7 @@ foreach ($items as $item) {
 
 // Prepare link to social profiles
 $out .= "\n\t\t<a class='social-icon $profileName uk-icon-link uk-margin-small-right' title='$profileName'
-                  href='$getUrl' target='_blank' rel='noopener' data-uk-icon='icon:$profileName; ratio:2'></a>\n";
+                  href='$getUrl' target='_blank' rel='noreferrer noopener' data-uk-icon='icon:$profileName; ratio:2'></a>\n";
 }
 // Return all Social Profiles
   return $out;
