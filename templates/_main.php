@@ -95,7 +95,7 @@ if ( setting('background-image') && $img ) {
 <!-- /BREADCRUMB -->
 
 <!-- NAVIGATION  -->
-<nav id='nav' class="nav uk-container uk-overflow-auto uk-margin-small-top">
+<nav id='nav' class="nav uk-container">
   <?= files()->render('views/template-parts/_navigation.php') ?>
 </nav>
 <!-- /NAVIGATION  -->

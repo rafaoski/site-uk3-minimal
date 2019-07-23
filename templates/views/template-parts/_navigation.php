@@ -2,7 +2,7 @@
 // Get home page and home childrens
 $root = pages('/')->and(pages('/')->children);
 ?>
-<div>
+<div class='uk-margin-top uk-margin-bottom uk-overflow-auto'>
   <ul class="uk-subnav uk-flex uk-flex-nowrap">
     <?php foreach ($root as $item):
       $class = $item->id == wire('page')->id ? 'uk-active active' : 'basic-link';
