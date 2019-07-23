@@ -1,6 +1,57 @@
 <?php namespace ProcessWire;
 
 /**
+ * Return Defer CSS https://www.giftofspeed.com/defer-loading-css/
+ * 
+ * @param array|string $options Options to modify default behavior:
+ *  - `custom_css` (link): link to custom css files.
+ *  - `uikit_css` (link): link to uikit css files.
+ *
+ */
+function DeferCss($options = array())
+{
+// $out is where we store the markup we are creating in this function
+$out = '';
+
+// numbers important for loop
+$i = 0;
+
+// Default Options
+$defaults = array(
+  'custom_css' => urls('templates') . 'assets/css/custom.css',
+  'uikit_css' => urls()->uikit_css,
+);
+
+// Merge Options
+$options = _ukMergeOptions($defaults, $options);
+
+$out .= "\n<!-- The below Javascript snippet will be defer any CSS file you want: -->\n";
+$out .= "<script>\n";
+  foreach ($options as $link) {
+$i++;
+    
+    $out .= "/* {$i} CSS File */\n";
+    $out .= "\tvar giftofspeed{$i} = document.createElement('link');\n";
+    $out .= "\tgiftofspeed{$i}.rel = 'stylesheet';\n";
+    $out .= "\tgiftofspeed{$i}.href = '{$link}';\n";
+    $out .= "\tgiftofspeed{$i}.type = 'text/css';\n";
+    $out .= "\tvar godefer{$i} = document.getElementsByTagName('link')[0];\n";
+    $out .= "\tgodefer{$i}.parentNode.insertBefore(giftofspeed{$i}, godefer{$i});\n";
+
+  }
+$out .= "</script>\n\n";
+
+$out .= "<!-- This will ensure that devices or browsers that do not support Javascript can load the CSS files as well -->\n";
+$out .= "<noscript>\n";
+$out .= "\t<link rel='stylesheet' type='text/css' href='$options[uikit_css]' />\n";
+$out .= "\t<link rel='stylesheet' type='text/css' href='$options[custom_css]' />\n";
+$out .= "</noscript>\n\n";
+
+  return $out;
+}
+
+/**
+ * Return Blog Archives
  * 
  * @param array|string $options Options to modify default behavior:
  *  - `end_date` (date): or whenever you want it to end like 2019.
