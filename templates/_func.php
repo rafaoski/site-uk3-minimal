@@ -21,7 +21,7 @@ function siteName()
  *  - `uikit_css` (link): link to uikit css files.
  *
  */
-function DeferCss($options = array())
+function deferCss($options = array())
 {
 // $out is where we store the markup we are creating in this function
 $out = '';
