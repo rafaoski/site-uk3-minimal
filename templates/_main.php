@@ -38,8 +38,7 @@ if ( setting('background-image') && $img ) {
 <?php if (page('meta_description')): ?>
 <meta name="description" id='description' content="<?= page('meta_description') ?>"/>
 <?php endif; ?>
-<?php // echo $cssFiles->each("<link rel='stylesheet' href='{value}'>\n") ?>
-<?= deferCss() ?>
+<?= $cssFiles->each("<link rel='stylesheet' href='{value}'>\n") ?>
 <?= $jsFiles->each("<script src='{value}' defer></script>\n") ?>
 <?= seoPagination() ?>
 <?php // echo hreflang(page()) ?>
