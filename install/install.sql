@@ -228,7 +228,7 @@ INSERT INTO `field_images` (`pages_id`, `data`, `sort`, `description`, `modified
 INSERT INTO `field_images` (`pages_id`, `data`, `sort`, `description`, `modified`, `created`, `filedata`) VALUES('1026', 'ionicons_svg_ios-bonfire.svg', '0', '', '2019-07-13 19:33:08', '2019-07-13 19:33:08', '');
 INSERT INTO `field_images` (`pages_id`, `data`, `sort`, `description`, `modified`, `created`, `filedata`) VALUES('1047', 'bomb.svg', '0', '', '2019-07-13 21:33:45', '2019-07-13 21:33:45', '');
 INSERT INTO `field_images` (`pages_id`, `data`, `sort`, `description`, `modified`, `created`, `filedata`) VALUES('1050', 'bell.svg', '0', '', '2019-07-13 21:38:57', '2019-07-13 21:38:57', '');
-INSERT INTO `field_images` (`pages_id`, `data`, `sort`, `description`, `modified`, `created`, `filedata`) VALUES('1054', 'lens.svg', '0', '', '2019-07-13 21:57:03', '2019-07-13 21:57:03', '');
+INSERT INTO `field_images` (`pages_id`, `data`, `sort`, `description`, `modified`, `created`, `filedata`) VALUES('1054', 'adjust.svg', '0', '', '2019-07-13 21:57:03', '2019-07-13 21:57:03', '');
 INSERT INTO `field_images` (`pages_id`, `data`, `sort`, `description`, `modified`, `created`, `filedata`) VALUES('1059', 'coffee-mug.svg', '0', '', '2019-07-14 19:45:14', '2019-07-14 19:45:14', '');
 INSERT INTO `field_images` (`pages_id`, `data`, `sort`, `description`, `modified`, `created`, `filedata`) VALUES('1059', 'beverage.svg', '1', '', '2019-07-14 19:50:21', '2019-07-14 19:50:21', '');
 INSERT INTO `field_images` (`pages_id`, `data`, `sort`, `description`, `modified`, `created`, `filedata`) VALUES('1060', 'leaf.svg', '0', '', '2019-07-14 19:46:42', '2019-07-14 19:46:42', '');
@@ -251,7 +251,7 @@ CREATE TABLE `field_logo` (
   FULLTEXT KEY `filedata` (`filedata`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `field_logo` (`pages_id`, `data`, `sort`, `description`, `modified`, `created`, `filedata`) VALUES('1016', 'lens.svg', '0', '', '2019-04-02 15:26:42', '2019-04-02 15:26:42', '');
+INSERT INTO `field_logo` (`pages_id`, `data`, `sort`, `description`, `modified`, `created`, `filedata`) VALUES('1016', 'adjust.svg', '0', '', '2019-04-02 15:26:42', '2019-04-02 15:26:42', '');
 
 DROP TABLE IF EXISTS `field_meta_description`;
 CREATE TABLE `field_meta_description` (
