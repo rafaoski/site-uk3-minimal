@@ -166,8 +166,6 @@ function hreflang(Page $page)
  *  - `home_url` (link): Home Page URL.
  *  - `logo_url` (link): Site logo URL.
  *  - `logo_alt` (string): Loago alt text.
- *  - `logo_width` (string|int): Default 200 ( 200px ).
- *  - `logo_height` (string|int): Default auto.
  *
  */
 function siteLogo($options = array())
@@ -176,15 +174,13 @@ function siteLogo($options = array())
   $defaults = array(
 		'home_url' => setting('home')->url,
     'logo_url' => pages('options')->logo ? pages('options')->logo->url : '',
-    'logo_alt' => pages('options')->site_name,
-    'logo_width' => 200,
-    'logo_height' => 'auto',
+    'logo_alt' => pages('options')->site_name
   );
 // Merge Options
   $options = _ukMergeOptions($defaults, $options);
 // Display logo
-  return "<a class='uk-flex uk-flex-center' href='$options[home_url]'>
-  <img src='$options[logo_url]' width='$options[logo_width]' height='$options[logo_height]' alt='$options[logo_alt]'></a>\n";
+  return "<a href='$options[home_url]'>
+  <img class='uk-preserve-width' src='$options[logo_url]' alt='$options[logo_alt]'></a>\n";
 }
 
 /**

@@ -58,7 +58,7 @@ if ( setting('background-image') && $img ) {
   <!-- /PRIVACY POLICY-->
 
   <!-- LOGO-->
-  <div id='logo' class='logo' data-pw-optional>
+  <div id='logo' class='logo uk-flex uk-flex-center' data-pw-optional>
       <?= siteLogo() ?>
   </div>
   <!-- /LOGO -->

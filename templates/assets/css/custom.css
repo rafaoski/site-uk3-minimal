@@ -10,6 +10,11 @@ body {
   background: #273241;
 }
 
+/* LOGO */
+.logo img {
+  width: 200px;
+}
+
 /* SITE NAME */
 .site-name.uk-heading-small {
   letter-spacing: 10px;
