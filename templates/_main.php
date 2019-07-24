@@ -52,12 +52,6 @@ if ( setting('background-image') && $img ) {
 
   <?php // echo files()->render('views/template-parts/_language-menu.php') // Language menu ?>
 
-  <!-- SOCIAL PROFILES-->
-  <div id="social-profiles" class='social-profiles uk-flex uk-flex-center uk-padding-small'>
-      <?= socialProfiles(pages('options')->textarea) ?>
-  </div>
-  <!-- /SOCIAL PROFILES -->
-
   <!-- PRIVACY POLICY-->
   <div id="privacy-policy" class='privacy-policy uk-padding-small uk-padding-remove-bottom uk-flex uk-flex-center'>
       <?= privacyPolicy(pages()->get("template=privacy-policy")) ?>
@@ -137,12 +131,16 @@ if ( setting('background-image') && $img ) {
 
 <!-- OFF CANVAS NAV -->
 <a id='offcanvas-toggle' aria-label='Off Canvas Menu' class='uk-position-top-right uk-position-fixed uk-butoon uk-button-secondary'
-    href="#off-overlay" data-uk-toggle>
-  <?= ukIcon('menu', 1.7) ?>
+   href="#off-overlay" data-uk-toggle><?= ukIcon('menu', 1.7) ?>
 </a>
 
 <div id="off-overlay" data-uk-offcanvas="overlay: true; flip: true;">
-  <?= files()->render('views/template-parts/_offcanvas-nav.php') ?>
+  <?php // Render Nav
+    echo files()->render('views/template-parts/_offcanvas-nav.php',
+      [ // Social Profiles
+        'socialProfiles' => socialProfiles(pages('options')->textarea)
+      ]);
+  ?>
 </div>
 <!-- /OFF CANVAS NAV -->
 

@@ -1,6 +1,13 @@
 <?php namespace ProcessWire ?>
 
 <div class="uk-offcanvas-bar">
+
+  <!-- SOCIAL PROFILES-->
+  <div id="social-profiles" class='social-profiles uk-flex uk-flex-center uk-padding-small'>
+      <?= $socialProfiles ?>
+  </div>
+  <!-- /SOCIAL PROFILES -->
+  
   <button class="uk-offcanvas-close" type="button" data-uk-close></button>
   <h3 class='uk-h4'><a aria-label='Home' href='<?= setting('home')->url ?>'><?= pages('options')->site_name ?></a></h3>
   <?php
@@ -17,4 +24,5 @@
     ]);
   });
   ?>
+
 </div>

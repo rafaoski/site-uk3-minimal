@@ -10,11 +10,6 @@ body {
   background: #273241;
 }
 
-/* LOGO */
-.logo img {
-  width: 180px;
-}
-
 /* SITE NAME */
 .site-name.uk-heading-small {
   letter-spacing: 10px;
@@ -113,11 +108,6 @@ figure figcaption {
 }
 
 @media screen and (max-width: 1024px) {
-
-/* LOGO */
-.logo img {
-  width: 120px;
-}
 
 /* SITE NAME */
 .site-name.uk-heading-small {
