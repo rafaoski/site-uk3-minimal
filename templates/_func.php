@@ -6,11 +6,11 @@
  */
 function siteName()
 {
-  if (page('template')->name == 'home') {
-    return pages('options')->site_name;
-  } else {
-    return ' / ' . page('title') . ' / ';
-  }
+		if (page('template')->name == 'home') {
+			return pages('options')->site_name;
+		} else {
+			return ' / ' . page('title') . ' / ';
+		}
 }
 
 /**
@@ -31,8 +31,8 @@ $i = 0;
 
 // Default Options
 $defaults = array(
-  'custom_css' => urls('templates') . 'assets/css/custom.css',
-  'uikit_css' => urls()->uikit_css,
+	'custom_css' => urls('templates') . 'assets/css/custom.css',
+	'uikit_css' => urls()->uikit_css,
 );
 
 // Merge Options
@@ -40,18 +40,18 @@ $options = _ukMergeOptions($defaults, $options);
 
 $out .= "\n<!-- The below Javascript snippet will be defer any CSS file you want: -->\n";
 $out .= "<script>\n";
-  foreach ($options as $link) {
+	foreach ($options as $link) {
 $i++;
 
-    $out .= "/* {$i} CSS File */\n";
-    $out .= "\tvar giftofspeed{$i} = document.createElement('link');\n";
-    $out .= "\tgiftofspeed{$i}.rel = 'stylesheet';\n";
-    $out .= "\tgiftofspeed{$i}.href = '{$link}';\n";
-    $out .= "\tgiftofspeed{$i}.type = 'text/css';\n";
-    $out .= "\tvar godefer{$i} = document.getElementsByTagName('link')[0];\n";
-    $out .= "\tgodefer{$i}.parentNode.insertBefore(giftofspeed{$i}, godefer{$i});\n";
+		$out .= "/* {$i} CSS File */\n";
+		$out .= "\tvar giftofspeed{$i} = document.createElement('link');\n";
+		$out .= "\tgiftofspeed{$i}.rel = 'stylesheet';\n";
+		$out .= "\tgiftofspeed{$i}.href = '{$link}';\n";
+		$out .= "\tgiftofspeed{$i}.type = 'text/css';\n";
+		$out .= "\tvar godefer{$i} = document.getElementsByTagName('link')[0];\n";
+		$out .= "\tgodefer{$i}.parentNode.insertBefore(giftofspeed{$i}, godefer{$i});\n";
 
-  }
+	}
 $out .= "</script>\n\n";
 
 $out .= "<!-- This will ensure that devices or browsers that do not support Javascript can load the CSS files as well -->\n";
@@ -60,7 +60,7 @@ $out .= "\t<link rel='stylesheet' type='text/css' href='$options[uikit_css]' />\
 $out .= "\t<link rel='stylesheet' type='text/css' href='$options[custom_css]' />\n";
 $out .= "</noscript>\n\n";
 
-  return $out;
+	return $out;
 }
 
 /**
@@ -83,51 +83,51 @@ $blogPage = pages()->get("template=blog-posts");
 // Default Options
 $defaults = array(
 // Like First Blog Post ( 2016 )
-  'start_date' => wireDate('Y', $blogPage->children()->last()->getUnformatted("date")),
+	'start_date' => wireDate('Y', $blogPage->children()->last()->getUnformatted("date")),
 // Like Last Blog Post ( 2019 )
-  'end_date' => wireDate('Y', $blogPage->children()->first()->getUnformatted("date")),
+	'end_date' => wireDate('Y', $blogPage->children()->first()->getUnformatted("date")),
 // How many show the monthly archives in the sidebar of the blog.
-  'count_months' => 12,
+	'count_months' => 12,
 );
 // Merge Options
 $options = _ukMergeOptions($defaults, $options);
 
 // CODE FROM => https://processwire.com/talk/topic/263-creating-archives-for-newsblogs-sections/
-    for ($year = $options['end_date']; $year >= $options['start_date']; $year--) {
+		for ($year = $options['end_date']; $year >= $options['start_date']; $year--) {
 
-        for ($month = 12; $month > 0; $month--) {
-            $startTime = strtotime("$year-$month-01"); // 2011-12-01 example
-            if ($startTime > time()) {
-                continue; // don't bother with future dates
-            }
-            if ($month == 12) {
-                $endTime = strtotime(($year+1) . "-01-01");
-            } else {
-                $endTime = strtotime("$year-" . ($month+1) . "-01");
-            }
-            // All archive entries
-            $entries = $blogPage->children("date>=$startTime, date<$endTime");
-            // Get item url slug date
-            $date = date("Y/m", $startTime);
-            // Archive url slug
-            $url = pages()->get("template=blog")->url . sanitizer()->pageName(setting('archives')) . '/' . $date . '/';
-            // If count entries bigger than 0
-            if (count($entries) > 0) {
-            // if is archive page show form option value
-              if(input()->urlSegment1 == sanitizer()->pageName(setting('archives'))) {
-                $out .= "<option value='$url'>$date - (" . count($entries) . ")</option>";
-              } else {
-            // How many show the monthly archives in the sidebar of the blog ( $options['count_months'] )
-              if(count($entries) <= $options['count_months']) {
-                $out .= "<li><a class='uk-button uk-button-text uk-text-left' href='$url'>$date - (" . count($entries) . ")</a></li>";
-              }
+				for ($month = 12; $month > 0; $month--) {
+						$startTime = strtotime("$year-$month-01"); // 2011-12-01 example
+						if ($startTime > time()) {
+								continue; // don't bother with future dates
+						}
+						if ($month == 12) {
+								$endTime = strtotime(($year+1) . "-01-01");
+						} else {
+								$endTime = strtotime("$year-" . ($month+1) . "-01");
+						}
+						// All archive entries
+						$entries = $blogPage->children("date>=$startTime, date<$endTime");
+						// Get item url slug date
+						$date = date("Y/m", $startTime);
+						// Archive url slug
+						$url = pages()->get("template=blog")->url . sanitizer()->pageName(setting('archives')) . '/' . $date . '/';
+						// If count entries bigger than 0
+						if (count($entries) > 0) {
+						// if is archive page show form option value
+							if(input()->urlSegment1 == sanitizer()->pageName(setting('archives'))) {
+								$out .= "<option value='$url'>$date - (" . count($entries) . ")</option>";
+							} else {
+						// How many show the monthly archives in the sidebar of the blog ( $options['count_months'] )
+							if(count($entries) <= $options['count_months']) {
+								$out .= "<li><a class='uk-button uk-button-text uk-text-left' href='$url'>$date - (" . count($entries) . ")</a></li>";
+							}
 
-              }
-            }
-        }
-    }
+							}
+						}
+				}
+		}
 
-    return $out;
+		return $out;
 }
 
 /**
@@ -140,23 +140,23 @@ function hreflang(Page $page)
 {
 
 // $out is where we store the markup we are creating in this function
-  $out = '';
+	$out = '';
 
-  if(!$page->getLanguages()) return;
-  if (!modules()->isInstalled("LanguageSupportPageNames")) return;
+	if(!$page->getLanguages()) return;
+	if (!modules()->isInstalled("LanguageSupportPageNames")) return;
 // handle output of 'hreflang' link tags for multi-language
-  foreach(languages() as $language) {
-  // if this page is not viewable in the language, skip it
-    if(!$page->viewable($language)) continue;
-  // get the http URL for this page in the given language
-    $url = $page->localHttpUrl($language);
-  // hreflang code for language uses language name from homepage
-    $hreflang = setting('home')->getLanguageValue($language, 'name');
-    if($hreflang == 'home') $hreflang = setting('lang-code');
-  // output the <link> tag: note that this assumes your language names are the same as required by hreflang.
-    $out .= "<link rel='alternate' hreflang='$hreflang' href='$url' />\n";
-  }
-  return $out;
+	foreach(languages() as $language) {
+	// if this page is not viewable in the language, skip it
+		if(!$page->viewable($language)) continue;
+	// get the http URL for this page in the given language
+		$url = $page->localHttpUrl($language);
+	// hreflang code for language uses language name from homepage
+		$hreflang = setting('home')->getLanguageValue($language, 'name');
+		if($hreflang == 'home') $hreflang = setting('lang-code');
+	// output the <link> tag: note that this assumes your language names are the same as required by hreflang.
+		$out .= "<link rel='alternate' hreflang='$hreflang' href='$url' />\n";
+	}
+	return $out;
 }
 
 /**
@@ -171,16 +171,16 @@ function hreflang(Page $page)
 function siteLogo($options = array())
 {
 // Default Options
-  $defaults = array(
+	$defaults = array(
 		'home_url' => setting('home')->url,
-    'logo_url' => pages('options')->logo ? pages('options')->logo->url : '',
-    'logo_alt' => pages('options')->site_name
-  );
+		'logo_url' => pages('options')->logo ? pages('options')->logo->url : '',
+		'logo_alt' => pages('options')->site_name
+	);
 // Merge Options
-  $options = _ukMergeOptions($defaults, $options);
+	$options = _ukMergeOptions($defaults, $options);
 // Display logo
-  return "<a href='$options[home_url]'>
-  <img class='uk-preserve-width' src='$options[logo_url]' alt='$options[logo_alt]'></a>\n";
+	return "<a href='$options[home_url]'>
+	<img class='uk-preserve-width' src='$options[logo_url]' alt='$options[logo_alt]'></a>\n";
 }
 
 /**
@@ -211,10 +211,10 @@ if(!$code) return;
 // Return Google Analytics Tracking Code
 return "<script defer src='https://www.googletagmanager.com/gtag/js?id=UA-{$code}'></script>
 <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'UA-{$code}');
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'UA-{$code}');
 </script>\n\n";
 }
 
@@ -242,24 +242,24 @@ $items = array_filter($items, 'strlen');
 // Start loop
 foreach ($items as $item) {
 // Get clean url
-  $getUrl = sanitizer()->text($item, ['reduceSpace' => true]);
+	$getUrl = sanitizer()->text($item, ['reduceSpace' => true]);
 // Remove ( https:// ) from url like ( https://twitter.com )
-  $profileName = substr($getUrl, 8);
+	$profileName = substr($getUrl, 8);
 // Get first position ( .com )
-  $pos = strpos($profileName, '.com/');
+	$pos = strpos($profileName, '.com/');
 // Show clean icon name like: ( 'twitter', 'facebook')
-  $profileName = substr($profileName, 0, $pos);
+	$profileName = substr($profileName, 0, $pos);
 
 // Or cut the profileName in this way
-  // $pos = strpos($getUrl, '.com/');
-  // $profileName = substr($getUrl, 8, $pos - 8);
+	// $pos = strpos($getUrl, '.com/');
+	// $profileName = substr($getUrl, 8, $pos - 8);
 
 // Prepare link to social profiles
 $out .= "\n\t\t<a class='social-icon $profileName uk-icon-link uk-margin-small-right' title='$profileName'
-                  href='$getUrl' target='_blank' rel='noopener noreferrer' data-uk-icon='icon:$profileName; ratio:1.5'></a>\n";
+	href='$getUrl' target='_blank' rel='noopener noreferrer' data-uk-icon='icon:$profileName; ratio:1.5'></a>\n";
 }
 // Return all Social Profiles
-  return $out;
+	return $out;
 }
 
 /**
@@ -276,11 +276,11 @@ if(!$privacyPage) return;
 $more = setting('read-more');
 return "
 <p>
-  <span data-uk-icon='icon:info; ratio:1.5'></span>
-  {$privacyPage->meta_title}
-  <a href='{$privacyPage->url}'>
-      $more
-  </a>
+	<span data-uk-icon='icon:info; ratio:1.5'></span>
+	{$privacyPage->meta_title}
+	<a href='{$privacyPage->url}'>
+			$more
+	</a>
 </p>
 ";
 }
@@ -294,31 +294,31 @@ return "
  */
 function googleFonts($options = array()) {
 
-  // Default Options
-  $defaults = array(
-    'fonts' => ['Nunito:200,600','Hanalei','Butcherman'],
-  );
-  // Merge Options
-  $options = _ukMergeOptions($defaults, $options);
+	// Default Options
+	$defaults = array(
+		'fonts' => ['Nunito:200,600','Hanalei','Butcherman'],
+	);
+	// Merge Options
+	$options = _ukMergeOptions($defaults, $options);
 
-  $fonts = "'" . implode("','" , $options['fonts']) . "'";
+	$fonts = "'" . implode("','" , $options['fonts']) . "'";
 
-  return "<script>
-  /* ADD GOOGLE FONTS WITH WEBFONTLOADER
-    https://github.com/typekit/webfontloader
-  */
-  WebFontConfig = {
-          google: {
-          families: [$fonts]
-      }
-  };
-  (function(d) {
-      var wf = d.createElement('script'), s = d.scripts[0];
-      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js';
-      wf.async = true;
-      s.parentNode.insertBefore(wf, s);
-  })(document);
-  </script>\n\n";
+	return "<script>
+	/* ADD GOOGLE FONTS WITH WEBFONTLOADER
+		https://github.com/typekit/webfontloader
+	*/
+	WebFontConfig = {
+					google: {
+					families: [$fonts]
+			}
+	};
+	(function(d) {
+			var wf = d.createElement('script'), s = d.scripts[0];
+			wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js';
+			wf.async = true;
+			s.parentNode.insertBefore(wf, s);
+	})(document);
+	</script>\n\n";
 }
 
 /**
@@ -337,22 +337,22 @@ if(!$item) return;
 $out = '';
 
 // Prev Next Button
-    $p_next = $item->next();
-    $p_prev = $item->prev();
+		$p_next = $item->next();
+		$p_prev = $item->prev();
 
 // link to the prev blog post, if there is one
-    if ($p_prev->id) {
+		if ($p_prev->id) {
 		$out .= "<a class='uk-button uk-button-text uk-text-large uk-margin-small' href='$p_prev->url'>";
-    $out .= ukIcon('arrow-left') . $p_prev->title . "</a>";
-    }
+		$out .= ukIcon('arrow-left') . $p_prev->title . "</a>";
+		}
 
 // link to the next blog post, if there is one
-    if ($p_next->id) {
-        $out .= "<a class='uk-button uk-button-text uk-text-large' href='$p_next->url'>";
-        $out .= $p_next->title . ukIcon('arrow-right') . "</a>";
-    }
+		if ($p_next->id) {
+				$out .= "<a class='uk-button uk-button-text uk-text-large' href='$p_next->url'>";
+				$out .= $p_next->title . ukIcon('arrow-right') . "</a>";
+		}
 
-    return $out;
+		return $out;
 }
 
 /**
@@ -367,16 +367,16 @@ function seoPagination()
 if( input()->pageNum == null || config()->pagerHeadTags == null ) return;
 
 // $out is where we store the markup we are creating in this function
-  $out = '';
+	$out = '';
 
 // https://processwire.com/blog/posts/processwire-2.6.18-updates-pagination-and-seo/
-    if (input()->pageNum > 1) {
-        $out .= "<meta name='robots' content='noindex,follow'>\n";
-    }
+		if (input()->pageNum > 1) {
+				$out .= "<meta name='robots' content='noindex,follow'>\n";
+		}
 // https://weekly.pw/issue/222/
-    if (config()->pagerHeadTags) {
-        $out .= config()->pagerHeadTags . "\n";
-    }
+		if (config()->pagerHeadTags) {
+				$out .= config()->pagerHeadTags . "\n";
+		}
 		return $out;
 }
 
@@ -398,37 +398,37 @@ if( input()->pageNum == null || config()->pagerHeadTags == null ) return;
 function toAny($options = array())
 {
 // If setting 'to-any' is not set true ( see _init.php setting() ) return null
-  if( setting('to-any') == false ) return;
+	if( setting('to-any') == false ) return;
 // $out is where we store the markup we are creating in this function
-  $out = '';
+	$out = '';
 // Reset variables
-  $buttonLinks = '';
+	$buttonLinks = '';
 // Default share links
-  $links = [
-    'twitter' => "<a class='a2a_button_twitter'></a>",
-    'facebook' => "<a class='a2a_button_facebook'></a>",
-    'google_plus' => "<a class='a2a_button_google_plus'></a>",
-    'linkedin' => "<a class='a2a_button_linkedin'></a>",
-    'rreddit' => "<a class='a2a_button_reddit'></a>",
-    'email' => "<a class='a2a_button_email'></a>",
-    'google_gmail' => "<a class='a2a_button_google_gmail'></a>",
-    'share_all' => "<a class='a2a_dd' href='https://www.addtoany.com/share'></a>"
-  ];
+	$links = [
+		'twitter' => "<a class='a2a_button_twitter'></a>",
+		'facebook' => "<a class='a2a_button_facebook'></a>",
+		'google_plus' => "<a class='a2a_button_google_plus'></a>",
+		'linkedin' => "<a class='a2a_button_linkedin'></a>",
+		'rreddit' => "<a class='a2a_button_reddit'></a>",
+		'email' => "<a class='a2a_button_email'></a>",
+		'google_gmail' => "<a class='a2a_button_google_gmail'></a>",
+		'share_all' => "<a class='a2a_dd' href='https://www.addtoany.com/share'></a>"
+	];
 // Foreach Items
-  foreach ($options as $key => $value) {
-    if($options[$key] == true) {
-      $buttonLinks .= $links[$key];
-    }
-  }
+	foreach ($options as $key => $value) {
+		if($options[$key] == true) {
+			$buttonLinks .= $links[$key];
+		}
+	}
 // Start Content
-  $out .= "<!-- AddToAny BEGIN -->
-  <div class='a2a_kit a2a_kit_size_32 a2a_floating_style a2a_vertical_style'
-       style='left:0px; top:80px; background-color: #2e2d2d99;'>";
-  $out .= $buttonLinks; // Show Links
-  $out .= "</div>
-  <script async src='https://static.addtoany.com/menu/page.js'></script>
-  <!-- /AddToAny END -->";
-  return $out;
+	$out .= "<!-- AddToAny BEGIN -->
+	<div class='a2a_kit a2a_kit_size_32 a2a_floating_style a2a_vertical_style'
+			 style='left:0px; top:80px; background-color: #2e2d2d99;'>";
+	$out .= $buttonLinks; // Show Links
+	$out .= "</div>
+	<script async src='https://static.addtoany.com/menu/page.js'></script>
+	<!-- /AddToAny END -->";
+	return $out;
 }
 
 /**
@@ -449,11 +449,11 @@ if(!page()->editable()) return;
 
 // Default Options
 $defaults = array(
-  'id' => 'edit-btn',
-  'div_class' => 'edit-btn uk-flex uk-flex-center uk-padding-small',
-  'link_class' => 'uk-button uk-button-large uk-button-primary',
-  'edit_text' => setting('edit'),
-  'edit_url' => page()->editURL,
+	'id' => 'edit-btn',
+	'div_class' => 'edit-btn uk-flex uk-flex-center uk-padding-small',
+	'link_class' => 'uk-button uk-button-large uk-button-primary',
+	'edit_text' => setting('edit'),
+	'edit_url' => page()->editURL,
 );
 // Merge Options
 $options = _ukMergeOptions($defaults, $options);
@@ -475,13 +475,13 @@ function debugInfo($options = array())
 {
 // Default Options
 $defaults = array(
-  'id' => 'debug-bar',
-  'class' => 'debug-bar'
+	'id' => 'debug-bar',
+	'class' => 'debug-bar'
 );
 // Merge Options
 $options = _ukMergeOptions($defaults, $options);
 // display region debugging info
-  if(config()->debug && user()->isSuperuser()) {
-    return "<div id='$options[id]' class='$options[class]'><!--PW-REGION-DEBUG--></div>";
-  }
+	if(config()->debug && user()->isSuperuser()) {
+		return "<div id='$options[id]' class='$options[class]'><!--PW-REGION-DEBUG--></div>";
+	}
 }

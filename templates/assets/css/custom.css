@@ -1,69 +1,68 @@
 /* ALL CONTENT */
 body {
-  background: no-repeat center center fixed;
-  /* background-size: contain; */
-  background-size: cover;
+	background: no-repeat center center fixed;
+	/* background-size: contain; */
+	background-size: cover;
 }
 
 /* UIKIT ELEMENTS */
 .uk-card-primary {
-  background: #273241;
+	background: #273241;
 }
 
 /* LOGO */
 .logo img {
-  width: 200px;
+	width: 200px;
 }
 
 /* SITE NAME */
 .site-name.uk-heading-small {
-  letter-spacing: 10px;
+	letter-spacing: 10px;
 }
 
 /* CONTENT BODY */
 .content-body {
-  font-size: 18px;
-  letter-spacing: 2px;
+	font-size: 18px;
+	letter-spacing: 2px;
 }
 .content-body li {
-  line-height: 2;
+	line-height: 2;
 }
 
 /* BLOG */
 .blog-title {
-  font-size: 28px
+	font-size: 28px
 }
 
 /* BASIC PAGE */
 .page-child li {
-  padding: 10px;
+	padding: 10px;
 }
 
 /* FOOTER */
 footer.footer {
-  background: #000000d6;
+	background: #000000d6;
 }
 footer .copy-text {
-  letter-spacing: 3px;
-  line-height: 2;
+	letter-spacing: 3px;
+	line-height: 2;
 }
 
 /* SEARCH FORM */
 .search-f .uk-label {
-  background: #3d3d3df0;
+	background: #3d3d3df0;
 }
 
 /* OFFCANVAS NAVIGATION */
 #offcanvas-toggle {
-  width: 34px;
-  height: 34px;
-  padding: 10px;
-  z-index: 1000;
+	width: 34px;
+	height: 34px;
+	padding: 10px;
+	z-index: 1000;
 }
 #off-overlay .uk-offcanvas-bar {
-  background: #000000eb;
+	background: #000000eb;
 }
-
 
 /****************************************************************
  * Bodycopy text and images
@@ -116,41 +115,40 @@ figure figcaption {
 
 /* SITE NAME */
 .site-name.uk-heading-small {
-  font-size: 24px;
-  letter-spacing: 2px;
+	font-size: 24px;
+	letter-spacing: 2px;
 }
 
 /* SOCIAL PROFILES */
 .social-icon {
-  width: 30px;
+	width: 30px;
 }
 
 /* BLOG */
 .blog-title {
-  font-size: 20px
+	font-size: 20px
 }
 .blog-post-icon {
-  width: 25px;
-  height: 25px;
+	width: 25px;
+	height: 25px;
 }
 .blog-info .uk-card-blog {
-  background: #2120202e;
+	background: #2120202e;
 }
 
 /* These styles are good to have on any ProcessWire site */
 
 .align_left, .align_right, .align_center {
-  /* display images in center rather than aligned */
-  display: block;
-  float: none;
-  margin: 1em auto;
-  max-width: 100%;
+/* display images in center rather than aligned */
+	display: block;
+	float: none;
+	margin: 1em auto;
+	max-width: 100%;
 }
 
-figure,
-  figure figcaption {
-  /* let figcaption display as wide as needed below image */
-    display: block;
-    text-align: center;
-  }
+figure, figure figcaption {
+/* let figcaption display as wide as needed below image */
+	display: block;
+	text-align: center;
+	}
 }

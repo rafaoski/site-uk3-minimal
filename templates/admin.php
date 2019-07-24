@@ -12,9 +12,9 @@
  *
  */
 
-// -- Custom Options Page
+// custom options page
 if( page()->name == 'admin_options' ) input()->get->id = pages()->get('options')->id;
-// -- Custom Blog Page
+// custom blog page
 if( page()->name == 'admin_blog' ) input()->get->id = pages()->get('template=blog-posts')->id;
-// -- Require Admin Templates
+// require admin templates
 require($config->paths->adminTemplates . 'controller.php');
