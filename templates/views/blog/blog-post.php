@@ -11,14 +11,14 @@ $blogPage = pages()->get("template=blog");
     <?php // include('parts/_blog-links.php') ?>
 </div>
 
-<p id='site-name-text'>
+<p id='site-name'>
   <a href='<?= $blogPage->url ?>'>
     <?= $blogPage->title ?>
     <?= ukIcon('reply', ['ratio' => '2.5', 'class' => 'blog-post-icon']) ?>
   </a>
 </p>
 
-<div id='content-body' class='-uk-margin-top -uk-margin-bottom uk-margin-medium-top uk-margin-medium-bottom'>
+<div id='content-body' class='-uk-margin-top -uk-margin-bottom'>
 
   <!-- CONTENT BLOG -->
   <div class='content-blog' data-uk-grid>

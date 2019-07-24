@@ -25,11 +25,11 @@ $blogIcons = ['hashtag','tag','user', 'forward','copy','rss']
 
 <!-- BLOG LINKS -->
 <div id='blog-links' class='blog-links uk-container uk-overflow-auto'>
-  <div class='uk-margin-small-top uk-margin-small-bottom'>
+  <div class=''>
     <ul class="uk-subnav uk-flex uk-flex-nowrap">
       <?php foreach ($blogLinks as $key => $link):
         $dataTurbolinks = $blogIcons[$key] == 'rss' ?  " data-turbolinks='false'" : '';
-        // title / aria-label / link url 
+        // title / aria-label / link url
           if($blogIcons[$key] == 'user') {
               $title = setting('authors');
               $link_url = $link->url . "$authorsUrlSlug/";

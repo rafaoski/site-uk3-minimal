@@ -3,7 +3,7 @@
 $root = pages('/')->and(pages('/')->children);
 ?>
 <div class='uk-overflow-auto'>
-  <ul class="uk-subnav uk-flex uk-flex-nowrap uk-margin-top uk-margin-bottom">
+  <ul class="uk-subnav uk-subnav-divider uk-flex uk-flex-nowrap uk-margin-top uk-margin-bottom">
     <?php foreach ($root as $item):
       $class = $item->id == wire('page')->id ? 'uk-active active' : 'basic-link';
     ?>

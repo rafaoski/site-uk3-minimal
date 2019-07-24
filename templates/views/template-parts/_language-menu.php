@@ -5,8 +5,8 @@ if (!modules()->isInstalled("LanguageSupportPageNames")) return;
 ?>
 
 <!-- LANGUAGE MENU -->
-<div id='language-menu' class='language-menu uk-position-left uk-margin-small-left uk-margin-small-top'>
-  <ul class="uk-subnav uk-subnav-divider">
+<div id='lang-menu' class='lang-menu uk-padding-small uk-overflow-auto'>
+  <ul class="uk-subnav uk-subnav-divider uk-flex uk-flex-nowrap uk-margin-top uk-margin-bottom">
   <?php
     foreach(languages() as $language) {
       if(!page()->viewable($language)) continue; // is page viewable in this language?

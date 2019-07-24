@@ -4,7 +4,7 @@
 $textDate = $date = '';
 
 // archive text
-$archiveText = $archivesUrlSlug;
+$archiveText = ' / ' . $archivesUrlSlug . ' / ';
 
 // item year
 $y = $sanitizer->date(input()->urlSegment2);
@@ -57,8 +57,8 @@ $items = pages()->find("template=blog-post, sort=-date, limit=12");
 
 <meta name="description" id='description' data-pw-remove/>
 
-<p id='site-name-text'>
-    / <?= $archiveText ?>
+<p id='site-name'>
+     <?= $archiveText ?>
 </p>
 
 <div id='bredcrumb' class='breadcrumb uk-container uk-margin-small-top uk-visible@m' data-pw-replace>

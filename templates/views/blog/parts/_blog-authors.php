@@ -18,8 +18,8 @@ $pagination = ukPagination($blogAuthors, ['baseUrl' => "./"]);
 <title id='title'><?= setting('authors') ?></title>
 <meta name="description" id='description' data-pw-remove/>
 
-<p id='site-name-text'>
-   / <?= setting('authors') ?>
+<p id='site-name'>
+   / <?= setting('authors') ?> /
 </p>
 
 <div id='bredcrumb' class='breadcrumb uk-container uk-margin-small-top uk-visible@m' data-pw-replace>

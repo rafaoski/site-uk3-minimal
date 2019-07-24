@@ -1,8 +1,21 @@
 <?php namespace ProcessWire;
 
 /**
+ * Return site name or page title
+ *
+ */
+function siteName()
+{
+  if (page('template')->name == 'home') {
+    return pages('options')->site_name;
+  } else {
+    return ' / ' . page('title') . ' / ';
+  }
+}
+
+/**
  * Return Defer CSS https://www.giftofspeed.com/defer-loading-css/
- * 
+ *
  * @param array|string $options Options to modify default behavior:
  *  - `custom_css` (link): link to custom css files.
  *  - `uikit_css` (link): link to uikit css files.
@@ -29,7 +42,7 @@ $out .= "\n<!-- The below Javascript snippet will be defer any CSS file you want
 $out .= "<script>\n";
   foreach ($options as $link) {
 $i++;
-    
+
     $out .= "/* {$i} CSS File */\n";
     $out .= "\tvar giftofspeed{$i} = document.createElement('link');\n";
     $out .= "\tgiftofspeed{$i}.rel = 'stylesheet';\n";
@@ -52,7 +65,7 @@ $out .= "</noscript>\n\n";
 
 /**
  * Return Blog Archives
- * 
+ *
  * @param array|string $options Options to modify default behavior:
  *  - `end_date` (date): or whenever you want it to end like 2019.
  *  - `start_date` (date): or whenever you want it to start like 2017.
@@ -81,7 +94,7 @@ $options = _ukMergeOptions($defaults, $options);
 
 // CODE FROM => https://processwire.com/talk/topic/263-creating-archives-for-newsblogs-sections/
     for ($year = $options['end_date']; $year >= $options['start_date']; $year--) {
-    
+
         for ($month = 12; $month > 0; $month--) {
             $startTime = strtotime("$year-$month-01"); // 2011-12-01 example
             if ($startTime > time()) {
@@ -108,9 +121,9 @@ $options = _ukMergeOptions($defaults, $options);
               if(count($entries) <= $options['count_months']) {
                 $out .= "<li><a class='uk-button uk-button-text uk-text-left' href='$url'>$date - (" . count($entries) . ")</a></li>";
               }
-                
+
               }
-            }  
+            }
         }
     }
 
@@ -119,7 +132,7 @@ $options = _ukMergeOptions($defaults, $options);
 
 /**
  * Return the hreflang parameter
- * 
+ *
  * @param Page $page
  *
  */
@@ -148,7 +161,7 @@ function hreflang(Page $page)
 
 /**
  * Return Site Logo
- * 
+ *
  * @param array|string $options Options to modify default behavior:
  *  - `home_url` (link): Home Page URL.
  *  - `logo_url` (link): Site logo URL.
@@ -166,7 +179,7 @@ function siteLogo($options = array())
 // Merge Options
   $options = _ukMergeOptions($defaults, $options);
 // Display logo
-  return "<a href='$options[home_url]'><img src='$options[logo_url]' alt='$options[logo_alt]'></a>\n";
+  return "<a class='uk-flex uk-flex-center' href='$options[home_url]'><img src='$options[logo_url]' alt='$options[logo_alt]'></a>\n";
 }
 
 /**
@@ -205,8 +218,8 @@ return "<script defer src='https://www.googletagmanager.com/gtag/js?id=UA-{$code
 }
 
 /**
- * Return Social Profiles 
- * 
+ * Return Social Profiles
+ *
  * @param string $items Url social profiles separate with comma like:
  * https://facebook.com/,
  * https://twitter.com/processwire,
@@ -242,15 +255,15 @@ foreach ($items as $item) {
 
 // Prepare link to social profiles
 $out .= "\n\t\t<a class='social-icon $profileName uk-icon-link uk-margin-small-right' title='$profileName'
-                  href='$getUrl' target='_blank' rel='noreferrer noopener' data-uk-icon='icon:$profileName; ratio:2'></a>\n";
+                  href='$getUrl' target='_blank' rel='noopener' data-uk-icon='icon:$profileName; ratio:2'></a>\n";
 }
 // Return all Social Profiles
   return $out;
 }
 
 /**
- * Return Privacy Policy Page 
- * 
+ * Return Privacy Policy Page
+ *
  * @param Page $privacyPage get privacy poilcy page
  *
  */
@@ -273,7 +286,7 @@ return "
 
 /**
  * Return Google Fonts
- * 
+ *
  * @param array|string $options Options to modify default behavior:
  *  - `fonts` (array): Font families from google fonts ( https://fonts.google.com/ ).
  *
@@ -286,9 +299,9 @@ function googleFonts($options = array()) {
   );
   // Merge Options
   $options = _ukMergeOptions($defaults, $options);
-  
+
   $fonts = "'" . implode("','" , $options['fonts']) . "'";
-  
+
   return "<script>
   /* ADD GOOGLE FONTS WITH WEBFONTLOADER
     https://github.com/typekit/webfontloader
@@ -342,14 +355,14 @@ $out = '';
 }
 
 /**
- * Return seo meta robots ( 'noindex, follow' ) or seo pagination 
- * 
+ * Return seo meta robots ( 'noindex, follow' ) or seo pagination
+ *
  * @return mixed
  *
  */
 function seoPagination()
 {
-// If not any pageNum or pageHeaderTags 
+// If not any pageNum or pageHeaderTags
 if( input()->pageNum == null || config()->pagerHeadTags == null ) return;
 
 // $out is where we store the markup we are creating in this function
@@ -387,7 +400,7 @@ function toAny($options = array())
   if( setting('to-any') == false ) return;
 // $out is where we store the markup we are creating in this function
   $out = '';
-// Reset variables  
+// Reset variables
   $buttonLinks = '';
 // Default share links
   $links = [
@@ -419,7 +432,7 @@ function toAny($options = array())
 
 /**
  * Return Link to Edit Page
- * 
+ *
  * @param array|string $options Options to modify default behavior:
  *  - `id` (string): Selector id.
  *  - `div_class` (string): Selector div class.
@@ -451,7 +464,7 @@ return "<div id='$options[id]' class='$options[div_class]'>
 
 /**
  * Return region debugging info
- * 
+ *
  * @param array|string $options Options to modify default behavior:
  *  - `id` (string): Selector id.
  *  - `class` (string): Selector class.

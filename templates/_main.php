@@ -47,62 +47,59 @@ if ( setting('background-image') && $img ) {
 
 <body id='html-body' class='html-body <?= setting('body-classes')->implode(' ') ?>'<?= $style ?>>
 
-<!-- TOP PANEL-->
-<div id='top-panel' class='top-panel uk-container'>
-  <div class="uk-flex uk-flex-center uk-flex-wrap uk-margin-medium-top">
-    <div id="social-profiles" class='social-profiles'>
-        <?= socialProfiles(pages('options')->textarea) ?>
-    </div>
+<!-- HEADER -->
+<header id='header' class='header uk-panel'>
 
-    <div id="privacy-policy" class='privacy-policy uk-padding-small'>
-        <?= privacyPolicy(pages()->get("template=privacy-policy")) ?>
-    </div>
+  <?php // echo files()->render('views/template-parts/_language-menu.php') // Language menu ?>
 
-      <?php // -- LANGUAGE MENU
-      // echo files()->render('views/template-parts/_language-menu.php') ?>
+  <!-- SOCIAL PROFILES-->
+  <div id="social-profiles" class='social-profiles uk-flex uk-flex-center uk-padding-small'>
+      <?= socialProfiles(pages('options')->textarea) ?>
   </div>
-</div>
-<!-- /TOP PANEL-->
+  <!-- /SOCIAL PROFILES -->
 
-<!-- SITE INFO -->
-<div id='site-info' class="site-info uk-flex uk-flex-center uk-flex-wrap uk-flex-middle">
-  <div id="logo" class='logo' data-pw-optional>
+  <!-- PRIVACY POLICY-->
+  <div id="privacy-policy" class='privacy-policy uk-padding-small uk-padding-remove-bottom uk-flex uk-flex-center'>
+      <?= privacyPolicy(pages()->get("template=privacy-policy")) ?>
+  </div>
+  <!-- /PRIVACY POLICY-->
+
+  <!-- LOGO-->
+  <div id='logo' class='logo' data-pw-optional>
       <?= siteLogo() ?>
   </div>
+  <!-- /LOGO -->
 
-  <div id='site-name' class="site-name uk-padding-small">
-      <p id='site-name-text' class='site-name-text uk-text-uppercase uk-margin-remove uk-heading-small'>
-        <?php if (page('template')->name == 'home'): ?>
-          <?= pages('options')->site_name ?>
-          <?php else: ?>
-          / <?= page('title') ?>
-        <?php endif; ?>
-      </p>
+  <!-- SITE INFO -->
+  <div id='site-info' class='site-info uk-text-center'>
+    <p id='site-name' class='site-name uk-text-uppercase uk-heading-small uk-margin-remove'>
+      <?= siteName() ?>
+    </p>
   </div>
-</div>
-<!-- /SITE INFO -->
+  <!-- /SITE INFO -->
 
-<!-- BREADCRUMB -->
-<div id='bredcrumb' class='breadcrumb uk-container' data-pw-optional>
-  <div class='uk-float-right'>
+  <!-- BREADCRUMB -->
+  <div id="breadcrumb" class='uk-float-right uk-padding-small'>
     <?php if(page()->parent->id > setting('home')->id) echo ukBreadcrumb(page(),
-          [
-            'class' => 'uk-visible@m',
-            'appendCurrent' => true
-          ]);
+        [
+          'class' => 'uk-visible@m',
+          'appendCurrent' => true
+        ]);
     ?>
   </div>
-</div>
-<!-- /BREADCRUMB -->
+  <!-- /BREADCRUMB -->
 
-<!-- NAVIGATION  -->
-<nav id='nav' class="nav uk-container">
-  <?= files()->render('views/template-parts/_navigation.php') ?>
-</nav>
-<!-- /NAVIGATION  -->
+  <!-- NAVIGATION  -->
+  <nav id='nav' class="nav uk-container">
+    <?= files()->render('views/template-parts/_navigation.php') ?>
+  </nav>
+  <!-- /NAVIGATION  -->
+
+</header>
+<!-- /HEADER -->
 
 <!-- HERO -->
-<div id='hero' class='hero uk-container uk-container-expand'>
+<div id="hero" class='hero uk-flex uk-flex-center uk-flex-middle uk-text-center uk-padding-small' data-uk-grid>
   <?php // -- Render Hero
     echo files()->render('views/template-parts/_hero-content.php',
         [
@@ -122,23 +119,32 @@ if ( setting('background-image') && $img ) {
 <?= editPage() ?>
 <?= debugInfo() ?>
 
+<!-- FOOTER -->
 <footer id='footer' class="footer uk-section uk-section-small uk-margin-large-top">
-  <div id="to-top" class='to-top uk-float-right uk-padding'>
-    <a title='to-top' class='uk-text-danger' href="#" data-uk-totop data-uk-scroll></a>
-  </div>
+
+  <a id="to-top" title='to-top' class='to-top uk-float-right uk-padding uk-text-danger' href="#" data-uk-totop data-uk-scroll></a>
 
   <div id="search-form" class='search-form uk-container uk-margin-small-bottom uk-width-1-2@m'>
       <?= files()->render('views/template-parts/_search-form.php') ?>
   </div>
 
-<p id='copy-text' class="copy-text uk-text-small uk-text-center uk-text-muted uk-padding-small">
-    <?php echo files()->render('views/template-parts/_footer-demo-copyright.php') ?>
-    <?php // echo files()->render('views/template-parts/_footer-copyright.php') ?>
+  <p id='copy-text' class="copy-text uk-text-small uk-text-center uk-text-muted uk-padding-small">
+      <?php echo files()->render('views/template-parts/_footer-demo-copyright.php') ?>
+      <?php // echo files()->render('views/template-parts/_footer-copyright.php') ?>
   </p>
 </footer>
+<!-- /FOOTER -->
 
-<?php // -- Off Canvas Nav
-echo files()->render('views/template-parts/_offcanvas-nav.php') ?>
+<!-- OFF CANVAS NAV -->
+<a id='offcanvas-toggle' aria-label='Off Canvas Menu' class='uk-position-top-right uk-position-fixed uk-butoon uk-button-secondary'
+    href="#off-overlay" data-uk-toggle>
+  <?= ukIcon('menu', 1.7) ?>
+</a>
+
+<div id="off-overlay" data-uk-offcanvas="overlay: true; flip: true;">
+  <?= files()->render('views/template-parts/_offcanvas-nav.php') ?>
+</div>
+<!-- /OFF CANVAS NAV -->
 
 <?php
 // echo googleFonts( ['fonts' => ['Nunito:200,600','Butcherman']] ); // Google Fonts
