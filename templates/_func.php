@@ -434,7 +434,7 @@ function toAny($options = array())
 // Start Content
 	$out .= "<!-- AddToAny BEGIN -->
 	<div class='a2a_kit a2a_kit_size_32 a2a_floating_style a2a_vertical_style'
-			 style='left:0px; top:80px; background-color: #2e2d2d99;'>";
+			 style='left:0px; top:100px; background-color: #2e2d2d99;'>";
 	$out .= $buttonLinks; // Show Links
 	$out .= "</div>
 	<script async src='https://static.addtoany.com/menu/page.js'></script>
