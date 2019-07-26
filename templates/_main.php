@@ -44,7 +44,7 @@ if ( setting('background-image') && $img ) { // set Background Image
 <?= $cssFiles->each("<link rel='stylesheet' href='{value}'>\n") ?>
 <?= $jsFiles->each("<script src='{value}' defer></script>\n") ?>
 <?= seoPagination() ?>
-<?php // echo hreflang(page()) ?>
+<?= hreflang(page()) ?>
 </head>
 
 <body id='html-body' class='html-body <?= setting('body-classes')->implode(' ') ?>'<?= $style ?>>
@@ -52,12 +52,13 @@ if ( setting('background-image') && $img ) { // set Background Image
 <!-- HEADER -->
 <header id='header' class='header uk-panel'>
 
-	<?php // echo files()->render('views/template-parts/_language-menu.php') // Language menu ?>
 
 	<!-- PRIVACY POLICY-->
-	<div id="privacy-policy" class='privacy-policy uk-padding-small uk-padding-remove-bottom uk-flex uk-flex-center'>
+	<div id="privacy-policy" class='privacy-policy uk-padding-small uk-padding-remove-bottom uk-flex uk-flex-left'>
 		<?= privacyPolicy(pages()->get("template=privacy-policy")) ?>
 	</div>
+
+	<?= files()->render('views/template-parts/_language-menu.php') // Language menu ?>
 
 	<!-- LOGO-->
 	<div id='logo' class='logo uk-flex uk-flex-center' data-pw-optional>
