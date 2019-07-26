@@ -6,11 +6,11 @@
  */
 function siteName()
 {
-		if (page('template')->name == 'home') {
-			return pages('options')->site_name;
-		} else {
-			return ' / ' . page('title') . ' / ';
-		}
+	if (page('template')->name == 'home') {
+		return pages('options')->site_name;
+	} else {
+		return ' / ' . page('title') . ' / ';
+	}
 }
 
 /**
