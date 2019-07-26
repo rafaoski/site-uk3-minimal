@@ -52,7 +52,6 @@ if ( setting('background-image') && $img ) { // set Background Image
 <!-- HEADER -->
 <header id='header' class='header uk-panel'>
 
-
 	<!-- PRIVACY POLICY-->
 	<div id="privacy-policy" class='privacy-policy uk-padding-small uk-padding-remove-bottom uk-flex uk-flex-left'>
 		<?= privacyPolicy(pages()->get("template=privacy-policy")) ?>
