@@ -265,21 +265,32 @@ $out .= "\n\t\t<a class='social-icon $profileName uk-icon-link uk-margin-small-r
 /**
  * Return Privacy Policy Page
  *
- * @param Page $privacyPage get privacy poilcy page
+ * @param array|string $options Options to modify default behavior:
+ *  - `privacy_page` (link): URL to privacy page.
+ *	- `id` (string): Selector id.
+ *  - `class` (string): Selector class.
+ *  - `read_more` (string): Read more text.
  *
  */
-function privacyPolicy($privacyPage)
+function privacyPolicy($options = array())
 {
-// If privacyPage is empty return null
-if(!$privacyPage) return;
-// More Text
-$more = setting('read-more');
+
+// Default Options
+$defaults = array(
+	'privacy_page' => pages()->get("template=privacy-policy"),
+	'id' => 'privacy-policy',
+	'class' => 'privacy-policy',
+	'read_more' => setting('read-more'),
+  );
+// Merge Options
+$options = _ukMergeOptions($defaults, $options);
+
 return "
 <p>
 	<span data-uk-icon='icon:info; ratio:1.5'></span>
-	{$privacyPage->meta_title}
-	<a href='{$privacyPage->url}'>
-			$more
+	{$options['privacy_page']->meta_title}
+	<a href='{$options['privacy_page']->url}'>
+			$options[read_more]
 	</a>
 </p>
 ";
