@@ -4,7 +4,7 @@
 $ifPages = page('meta_title') || page('meta_description');
 
 // if images
-if ($img): ?>
+if (isset($img)): ?>
 	<div id="hero-image" class='hero-image <?php if($ifPages) echo 'uk-width-1-3@m'?>'>
 		<?php if($img) echo "<img data-src='{$img->url}' alt='{$img_alt}' data-uk-img>"; ?>
 	</div>

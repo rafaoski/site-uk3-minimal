@@ -53,38 +53,26 @@ if ( setting('background-image') && $img ) { // set Background Image
 <header id='header' class='header uk-panel'>
 
 	<!-- PRIVACY POLICY-->
-	<div id="privacy-policy" class='privacy-policy uk-padding-small uk-padding-remove-bottom uk-flex uk-flex-left'>
-		<?= privacyPolicy(pages()->get("template=privacy-policy")) ?>
-	</div>
+	<?= privacyPolicy(['class' => 'privacy-policy uk-padding-small uk-flex uk-flex-wrap uk-flex-left']) ?>
 
 	<?= files()->render('views/template-parts/_language-menu.php') // Language menu ?>
 
 	<!-- LOGO-->
-	<div id='logo' class='logo uk-flex uk-flex-center' data-pw-optional>
-		<?= siteLogo() ?>
-	</div>
+	<?= siteLogo(['class' => 'logo uk-flex uk-flex-center']) ?>
 
-	<!-- SITE INFO -->
-	<div id='site-info' class='site-info uk-text-center'>
-		<p id='site-name' class='site-name uk-text-uppercase uk-heading-small uk-margin-remove'>
-			<?= siteName() ?>
-		</p>
-	</div>
+	<!-- SITE NAME -->
+	<?= siteName(['class' => 'site-name uk-text-uppercase uk-heading-small uk-margin-remove uk-text-center']) ?>
 
 	<!-- BREADCRUMB -->
-	<div id="breadcrumb" class='uk-float-right uk-padding-small'>
-		<?php if(page()->parent->id > setting('home')->id) echo ukBreadcrumb(page(),
-			[
-				'class' => 'uk-visible@m',
-				'appendCurrent' => true
-			]);
-		?>
-	</div>
+	<?php if(page()->parent->id > setting('home')->id) echo ukBreadcrumb(page(),
+		[
+			'class' => 'uk-float-right uk-padding-small uk-visible@m',
+			'appendCurrent' => true
+		]);
+	?>
 
 	<!-- NAVIGATION  -->
-	<nav id='nav' class="nav uk-container">
-		<?= files()->render('views/template-parts/_navigation.php') ?>
-	</nav>
+	<?= files()->render('views/template-parts/_navigation.php', ['id' => 'nav' , 'class' => 'nav uk-container']) ?>
 
 </header>
 

@@ -3,14 +3,35 @@
 /**
  * Return site name or page title
  *
+ * @param array|string $options Options to modify default behavior:
+ *  - `id` (string): Selector id.
+ *  - `class` (string): Selector class.
+ *
  */
-function siteName()
+function siteName($options = array())
 {
+// $out is where we store the markup we are creating in this function
+$out = '';
+
+// Default Options
+$defaults = array(
+	'id' => 'site-name',
+	'class' => 'site-name',
+  );
+// Merge Options
+$options = _ukMergeOptions($defaults, $options);
+
+$out .= "<p id='$options[id]' class='$options[class]'>";
+
 	if (page('template')->name == 'home') {
-		return pages('options')->site_name;
+		$out .= pages('options')->site_name;
 	} else {
-		return ' / ' . page('title') . ' / ';
+		$out .= ' / ' . page('title') . ' / ';
 	}
+
+$out .= "</p>";
+
+return $out;
 }
 
 /**
@@ -166,7 +187,8 @@ function hreflang(Page $page)
  *  - `home_url` (link): Home Page URL.
  *  - `logo_url` (link): Site logo URL.
  *  - `logo_alt` (string): Loago alt text.
- *
+ *  - `id` (string): Selector id.
+ *  - `class` (string): Selector class.
  */
 function siteLogo($options = array())
 {
@@ -174,12 +196,14 @@ function siteLogo($options = array())
 	$defaults = array(
 		'home_url' => setting('home')->url,
 		'logo_url' => pages('options')->logo ? pages('options')->logo->url : '',
-		'logo_alt' => pages('options')->site_name
+		'logo_alt' => pages('options')->site_name,
+		'id' => 'logo',
+		'class' => 'logo'
 	);
 // Merge Options
 	$options = _ukMergeOptions($defaults, $options);
 // Display logo
-	return "<a href='$options[home_url]'>
+	return "<a id='$options[id]' class='$options[class]' href='$options[home_url]'>
 	<img class='uk-preserve-width' src='$options[logo_url]' alt='$options[logo_alt]'></a>\n";
 }
 
@@ -267,9 +291,9 @@ $out .= "\n\t\t<a class='social-icon $profileName uk-icon-link uk-margin-small-r
  *
  * @param array|string $options Options to modify default behavior:
  *  - `privacy_page` (link): URL to privacy page.
+ *  - `read_more` (string): Read more text.
  *	- `id` (string): Selector id.
  *  - `class` (string): Selector class.
- *  - `read_more` (string): Read more text.
  *
  */
 function privacyPolicy($options = array())
@@ -278,17 +302,17 @@ function privacyPolicy($options = array())
 // Default Options
 $defaults = array(
 	'privacy_page' => pages()->get("template=privacy-policy"),
+	'read_more' => setting('read-more'),
 	'id' => 'privacy-policy',
 	'class' => 'privacy-policy',
-	'read_more' => setting('read-more'),
   );
 // Merge Options
 $options = _ukMergeOptions($defaults, $options);
 
 return "
-<p>
-	<span data-uk-icon='icon:info; ratio:1.5'></span>
-	{$options['privacy_page']->meta_title}
+<p id='$options[id]' class='$options[class]'>
+	<span data-uk-icon='icon:info; ratio:1.5'></span>&nbsp;
+	{$options['privacy_page']->meta_title}&nbsp;
 	<a href='{$options['privacy_page']->url}'>
 			$options[read_more]
 	</a>

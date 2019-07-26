@@ -455,7 +455,8 @@ function ukNavbarNav(PageArray $items, $options = array()) {
 function ukBreadcrumb($items = null, $options = array()) {
 
 	$defaults = array(
-		'class' => '',
+		'id' => 'breadcrumb',
+		'class' => 'breadcrumb',
 		'appendCurrent' => false,
 	);
 
@@ -465,7 +466,7 @@ function ukBreadcrumb($items = null, $options = array()) {
 
 	$options = _ukMergeOptions($defaults, $options);
 	$class = trim("uk-breadcrumb $options[class]");
-	$out = "<ul class='$class'>";
+	$out = "<ul id='$options[id]' class='$class'>";
 
 	foreach($items as $item) {
 		$out .= "<li><a href='$item->url'>$item->title</a></li>";
@@ -814,7 +815,7 @@ function ukBlogPost(Page $page, $options = array()) {
 	$moreIcon = ukIcon($options['moreIcon']);
 	$categoryIcon = ukIcon($options['categoryIcon']);
 	$n = $page->get('comments')->count();
-	
+
 	if($options['comments']) {
 		$numComments = $n ? "<a href='$page->url#comments'>" . ukIcon('comments') . " $n</a>" : "";
 	} else {
