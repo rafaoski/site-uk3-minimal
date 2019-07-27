@@ -296,8 +296,10 @@ function siteLogo($options = array())
 // Merge Options
 	$options = _ukMergeOptions($defaults, $options);
 // Display logo
-	return "<a id='$options[id]' class='$options[class]' href='$options[home_url]'>
-	<img class='uk-preserve-width' src='$options[logo_url]' alt='$options[logo_alt]'></a>\n";
+	return "<div id='$options[id]' class='$options[class]'>
+	        <a href='$options[home_url]'>
+			<img src='$options[logo_url]' alt='$options[logo_alt]'></a>
+			</div>\n";
 }
 
 /**
