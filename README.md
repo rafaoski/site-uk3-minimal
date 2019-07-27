@@ -27,9 +27,7 @@
  ``` pages('options')->site_name ```  
   ``` pages->get('options')->site_name ```
 6. The Author's website's blog entries and Archives page use URL segments `/authors/author-name/`, `/archives/Year/Month/`, see `views/blog/blog.php` for more info.
-7. For makes navigating faster, the [Turbolinks](https://github.com/turbolinks/turbolinks) script has been added.
-8. All scripts have the `async` or` defer` attributes added for better page loading https://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html
-9. This profile has additional functions (_uikit.php) from the [regular uikit3](https://processwire.com/blog/posts/introducing-a-new-processwire-site-profile/) profile, which is located in the basic ProcessWire installer ( 
+7. This profile has additional functions (_uikit.php) from the [regular uikit3](https://processwire.com/blog/posts/introducing-a-new-processwire-site-profile/) profile, which is located in the basic ProcessWire installer (
 there are minor changes, such as adding translations from _init.php )
 
 #### All images ( svg ) on the pages come from:
@@ -38,7 +36,6 @@ there are minor changes, such as adding translations from _init.php )
 
 #### References:
 [Uikit 3](https://getuikit.com/)   
-[Turbolinks](https://github.com/turbolinks/turbolinks)  
 [AddToAny - Universal Sharing Buttons](https://www.addtoany.com/)  
 
 ####  License

@@ -30,8 +30,6 @@ $blogIcons = ['hashtag','tag','user', 'forward','copy','rss']
 	<div>
 		<ul class="uk-subnav uk-flex uk-flex-nowrap">
 			<?php foreach ($blogLinks as $key => $link):
-			// data turbolinks ( https://github.com/turbolinks/turbolinks )
-				$dataTurbolinks = $blogIcons[$key] == 'rss' ?  " data-turbolinks='false'" : '';
 			// title / aria-label / link url
 				if($blogIcons[$key] == 'user') {
 					$title = setting('authors');
@@ -45,7 +43,7 @@ $blogIcons = ['hashtag','tag','user', 'forward','copy','rss']
 					}
 			?>
 			<li class='blog-links-item'>
-				<a class='uk-button uk-button-text' href='<?= $link_url ?>' aria-label="<?= $title ?>" <?= $dataTurbolinks ?>>
+				<a class='uk-button uk-button-text' href='<?= $link_url ?>' aria-label="<?= $title ?>">
 				<span class='uk-icon-button' data-uk-icon="icon: <?= $blogIcons[$key] ?>;"></span>
 				<span><?= $title ?></span>
 				</a>

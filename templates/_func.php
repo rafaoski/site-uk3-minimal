@@ -28,18 +28,13 @@ function siteHead($options = array())
 	// Merge Options
 	$options = _ukMergeOptions($defaults, $options);
 
-	// disable turbolinks if the user is logged in
-	if (user()->isLoggedin()) {
-		unset($options['js'][0]); // unset turbolinks
-	}
-
 	$out.= "<meta http-equiv='content-type' content='text/html; charset=utf-8'>\n";
 	$out.= "<meta name='viewport' content='width=device-width, initial-scale=1.0'>\n";
 	$out.= "<link rel='icon' href='$options[favicon]'/>\n";
 	$out.= "<title id='title'>$options[title]</title>\n";
 	$out.= "<meta id='description' name='description' content='$options[description]'/>\n";
 	$out.= $options['css']->each("<link rel='stylesheet' href='{value}'>\n");
-	$out.= $options['js']->each("<script src='{value}' defer></script>\n");
+	$out.= $options['js']->each("<script src='{value}'></script>\n");
 	$out.= hreflang(page()); // the hreflang parameter
 	$out.= seoPagination(); // seo meta robots ( 'noindex, follow' ) or seo pagination
 
