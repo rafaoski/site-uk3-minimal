@@ -61,11 +61,18 @@ footer .copy-text {
 
 /* OFFCANVAS NAVIGATION */
 #offcanvas-toggle {
-	width: 34px;
-	height: 34px;
-	padding: 10px;
+    background-color: #a5a0a0bd;
+    color: black;
+	margin: 10px;
+	padding: 5px;
 	z-index: 1000;
+	transition: all .3s ease-in-out;
 }
+
+#offcanvas-toggle:hover {
+	transform: scale(.9);
+}
+
 #off-overlay .uk-offcanvas-bar {
 	background: #000000eb;
 }

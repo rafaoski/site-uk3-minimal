@@ -1,8 +1,8 @@
 <?php namespace ProcessWire; ?>
 
 <!-- OFF CANVAS NAV -->
-<a id='offcanvas-toggle' aria-label='Off Canvas Menu' class='uk-position-top-right uk-position-fixed uk-butoon uk-button-secondary'
-	href="#off-overlay" data-uk-toggle><?= ukIcon('menu', 1.7) ?>
+<a id='offcanvas-toggle' aria-label='Off Canvas Menu' class='uk-position-top-right uk-position-fixed uk-butoon'
+	href="#off-overlay" data-uk-toggle><?= ukIcon('menu', ['ratio' => 2]) ?>
 </a>
 
 <div id="off-overlay" data-uk-offcanvas="overlay: true; flip: true;">
