@@ -1,6 +1,128 @@
 <?php namespace ProcessWire;
 
 /**
+ * Return site head
+ *
+ * @param array|string $options Options to modify default behavior:
+ *  - `css` (url): CSS files url.
+ *  - `js` (url): JS files url.
+ *  - `favicon` (url): Favicon url.
+ *  - `title` (string): Meta title.
+ *  - `description` (string): Meta description.
+ *
+ */
+function siteHead($options = array())
+{
+
+	// $out is where we store the markup we are creating in this function
+	$out = '';
+
+	// Default Options
+	$defaults = array(
+		'css' => setting('css-files'),
+		'js' => setting('js-files'),
+		'favicon' => setting('favicon'),
+		'title' => page('meta_title|title'),
+		'description' => page('meta_description')
+	);
+	// Merge Options
+	$options = _ukMergeOptions($defaults, $options);
+
+	// disable turbolinks if the user is logged in
+	if (user()->isLoggedin()) {
+		unset($options['js'][0]); // unset turbolinks
+	}
+
+	$out.= "<meta http-equiv='content-type' content='text/html; charset=utf-8'>";
+	$out.= "<meta name='viewport' content='width=device-width, initial-scale=1.0'>";
+	$out.= "<link rel='icon' href='$options[favicon]'/>";
+	$out.= "<title id='title'>$options[title]</title>";
+	$out.= "<meta id='description' name='description' content='$options[description]'/>";
+	$out.= $options['css']->each("<link rel='stylesheet' href='{value}'>\n");
+	$out.= $options['js']->each("<script src='{value}' defer></script>\n");
+	$out.= hreflang(page()); // the hreflang parameter
+	$out.= seoPagination(); // seo meta robots ( 'noindex, follow' ) or seo pagination
+
+	return $out;
+}
+
+/**
+ * Return the hreflang parameter
+ *
+ * @param Page $page
+ *
+ */
+function hreflang(Page $page)
+{
+
+// $out is where we store the markup we are creating in this function
+	$out = '';
+
+	if(!$page->getLanguages()) return;
+	if (!modules()->isInstalled("LanguageSupportPageNames")) return;
+// handle output of 'hreflang' link tags for multi-language
+	foreach(languages() as $language) {
+	// if this page is not viewable in the language, skip it
+		if(!$page->viewable($language)) continue;
+	// get the http URL for this page in the given language
+		$url = $page->localHttpUrl($language);
+	// hreflang code for language uses language name from homepage
+		$hreflang = setting('home')->getLanguageValue($language, 'name');
+		if($hreflang == 'home') $hreflang = setting('lang-code');
+	// output the <link> tag: note that this assumes your language names are the same as required by hreflang.
+		$out .= "<link rel='alternate' hreflang='$hreflang' href='$url' />\n";
+	}
+	return $out;
+}
+
+/**
+ * Return seo meta robots ( 'noindex, follow' ) or seo pagination
+ *
+ * @return mixed
+ *
+ */
+function seoPagination()
+{
+// If not any pageNum or pageHeaderTags
+if( input()->pageNum == null || config()->pagerHeadTags == null ) return;
+
+// $out is where we store the markup we are creating in this function
+	$out = '';
+
+// https://processwire.com/blog/posts/processwire-2.6.18-updates-pagination-and-seo/
+		if (input()->pageNum > 1) {
+				$out .= "<meta name='robots' content='noindex,follow'>\n";
+		}
+// https://weekly.pw/issue/222/
+		if (config()->pagerHeadTags) {
+				$out .= config()->pagerHeadTags . "\n";
+		}
+		return $out;
+}
+
+/**
+ * Return background image
+ *
+ * @param array|string $options Options to modify default behavior:
+ *  - `img` (url): Image url.
+ *
+ */
+function backgroundImage($options = array())
+{
+
+// Default Options
+	$defaults = array(
+		'img' => null,
+	);
+// Merge Options
+	$options = _ukMergeOptions($defaults, $options);
+
+	if ( setting('background-image') && $options['img'] ) {
+		return  " style='background-image: linear-gradient( rgba(255, 255, 255, 0.92), rgba(216, 216, 216, 0.88) ), url({$options['img']->url});'";
+	}
+}
+
+/**
  * Return site name or page title
  *
  * @param array|string $options Options to modify default behavior:
@@ -149,35 +271,6 @@ $options = _ukMergeOptions($defaults, $options);
 		}
 
 		return $out;
-}
-
-/**
- * Return the hreflang parameter
- *
- * @param Page $page
- *
- */
-function hreflang(Page $page)
-{
-
-// $out is where we store the markup we are creating in this function
-	$out = '';
-
-	if(!$page->getLanguages()) return;
-	if (!modules()->isInstalled("LanguageSupportPageNames")) return;
-// handle output of 'hreflang' link tags for multi-language
-	foreach(languages() as $language) {
-	// if this page is not viewable in the language, skip it
-		if(!$page->viewable($language)) continue;
-	// get the http URL for this page in the given language
-		$url = $page->localHttpUrl($language);
-	// hreflang code for language uses language name from homepage
-		$hreflang = setting('home')->getLanguageValue($language, 'name');
-		if($hreflang == 'home') $hreflang = setting('lang-code');
-	// output the <link> tag: note that this assumes your language names are the same as required by hreflang.
-		$out .= "<link rel='alternate' hreflang='$hreflang' href='$url' />\n";
-	}
-	return $out;
 }
 
 /**
@@ -387,31 +480,6 @@ $out = '';
 				$out .= $p_next->title . ukIcon('arrow-right') . "</a>";
 		}
 
-		return $out;
-}
-
-/**
- * Return seo meta robots ( 'noindex, follow' ) or seo pagination
- *
- * @return mixed
- *
- */
-function seoPagination()
-{
-// If not any pageNum or pageHeaderTags
-if( input()->pageNum == null || config()->pagerHeadTags == null ) return;
-
-// $out is where we store the markup we are creating in this function
-	$out = '';
-
-// https://processwire.com/blog/posts/processwire-2.6.18-updates-pagination-and-seo/
-		if (input()->pageNum > 1) {
-				$out .= "<meta name='robots' content='noindex,follow'>\n";
-		}
-// https://weekly.pw/issue/222/
-		if (config()->pagerHeadTags) {
-				$out .= config()->pagerHeadTags . "\n";
-		}
 		return $out;
 }
 
