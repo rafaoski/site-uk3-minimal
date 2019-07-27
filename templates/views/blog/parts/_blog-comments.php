@@ -6,7 +6,7 @@
 		$comments = page()->comments;
 		// comment list
 		if (count($comments)) {
-			echo ukHeading3("Comments", "icon=comments");
+			echo ukHeading3(setting('comment-text'), "icon=comments");
 			echo ukComments($comments);
 		}
 		// comment form
