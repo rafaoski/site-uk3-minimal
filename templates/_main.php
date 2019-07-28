@@ -34,15 +34,18 @@ if(page()->images && count(page()->images)) {
 		<?= siteLogo(['class' => 'logo uk-flex uk-flex-center']) ?>
 
 		<!-- SITE NAME -->
-		<?= siteName(['class' => 'site-name uk-text-uppercase uk-heading-small uk-margin-remove uk-text-center']) ?>
+		<p id='site-name' class='site-name uk-text-uppercase uk-heading-small uk-margin-remove uk-text-center'>
+			<?= siteName() ?>
+		</p>
 
 		<!-- BREADCRUMB -->
-		<?php if(page()->parent->id > setting('home')->id) echo ukBreadcrumb(page(),
-			[
-				'class' => 'uk-float-right uk-padding-small uk-visible@m',
-				'appendCurrent' => true
-			]);
-		?>
+		<div id='breadcrumb'>
+			<?php if(page()->parent->id > setting('home')->id) echo ukBreadcrumb(page(),
+				[
+					'appendCurrent' => true
+				]);
+			?>
+		</div>
 
 		<!-- NAVIGATION  -->
 		<?= files()->render('views/template-parts/_navigation.php', ['id' => 'nav' , 'class' => 'nav uk-container']) ?>

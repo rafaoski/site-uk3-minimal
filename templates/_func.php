@@ -121,8 +121,7 @@ function backgroundImage($options = array())
  * Return site name or page title
  *
  * @param array|string $options Options to modify default behavior:
- *  - `id` (string): Selector id.
- *  - `class` (string): Selector class.
+ *  - `separator` (string): Title separator
  *
  */
 function siteName($options = array())
@@ -132,21 +131,16 @@ $out = '';
 
 // Default Options
 $defaults = array(
-	'id' => 'site-name',
-	'class' => 'site-name',
-  );
+	'separator' => '/'
+);
 // Merge Options
 $options = _ukMergeOptions($defaults, $options);
-
-$out .= "<p id='$options[id]' class='$options[class]'>";
 
 	if (page('template')->name == 'home') {
 		$out .= pages('options')->site_name;
 	} else {
-		$out .= ' / ' . page('title') . ' / ';
+		$out .= $options['separator'] . page('title') . $options['separator'];
 	}
-
-$out .= "</p>";
 
 return $out;
 }
