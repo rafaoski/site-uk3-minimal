@@ -28,7 +28,7 @@ $pagination = ukPagination($blogPosts, ['baseUrl' => "./"]);
 	/ <?= $postUser->nick_name ?> /
 </p>
 
-<div id='bredcrumb' class='breadcrumb uk-container uk-margin-small-top uk-visible@m' data-pw-replace>
+<div id='breadcrumb' data-pw-replace>
 	<div class='uk-float-right'>
 		<ul class="uk-breadcrumb">
 			<?php foreach (page()->parents->and(page()) as $key):?>

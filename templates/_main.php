@@ -39,7 +39,7 @@ if(page()->images && count(page()->images)) {
 		</p>
 
 		<!-- BREADCRUMB -->
-		<div id='breadcrumb' class='uk-flex uk-flex-right uk-padding-small uk-visible@m'>
+		<div id='breadcrumb' class='breadcrumb uk-flex uk-flex-right uk-padding-small uk-visible@m'>
 			<?php if(page()->parent->id > setting('home')->id) echo ukBreadcrumb(page(),
 				[
 					'appendCurrent' => true
