@@ -27,12 +27,16 @@ if(page()->images && count(page()->images)) {
 	<header id='header' class='header uk-panel'>
 
 		<!-- PRIVACY POLICY-->
-		<?= privacyPolicy(['class' => 'privacy-policy uk-padding-small uk-flex uk-flex-wrap uk-flex-left']) ?>
+		<p id='privacy-policy' class='privacy-policy uk-padding-small uk-flex uk-flex-wrap uk-flex-left'>
+			<?= privacyPolicy() ?>
+		</p>
 
 		<?= files()->render('views/template-parts/_language-menu.php') // Language menu ?>
 
 		<!-- LOGO-->
-		<?= siteLogo(['class' => 'logo uk-flex uk-flex-center']) ?>
+		<div id='logo' class='logo uk-flex uk-flex-center'>
+			<?= siteLogo() ?>
+		</div>
 
 		<!-- SITE NAME -->
 		<p id='site-name' class='site-name uk-text-uppercase uk-heading-small uk-margin-remove uk-text-center'>
@@ -49,7 +53,9 @@ if(page()->images && count(page()->images)) {
 		</div>
 
 		<!-- NAVIGATION  -->
-		<?= files()->render('views/template-parts/_navigation.php', ['id' => 'nav' , 'class' => 'nav uk-container']) ?>
+		<nav id='nav' class='nav uk-container'>
+			<?= files()->render('views/template-parts/_navigation.php') ?>
+		</nav>
 
 	</header>
 

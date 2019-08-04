@@ -278,17 +278,12 @@ function siteLogo($options = array())
 	$defaults = array(
 		'home_url' => setting('home')->url,
 		'logo_url' => pages('options')->logo ? pages('options')->logo->url : '',
-		'logo_alt' => pages('options')->site_name,
-		'id' => 'logo',
-		'class' => 'logo'
+		'logo_alt' => pages('options')->site_name
 	);
 // Merge Options
 	$options = _ukMergeOptions($defaults, $options);
 // Display logo
-	return "<div id='$options[id]' class='$options[class]'>
-	        <a href='$options[home_url]'>
-			<img src='$options[logo_url]' alt='$options[logo_alt]'></a>
-			</div>\n";
+	return "<a href='$options[home_url]'><img src='$options[logo_url]' alt='$options[logo_alt]'></a>\n";
 }
 
 /**
@@ -386,22 +381,16 @@ function privacyPolicy($options = array())
 // Default Options
 $defaults = array(
 	'privacy_page' => pages()->get("template=privacy-policy"),
-	'read_more' => setting('read-more'),
-	'id' => 'privacy-policy',
-	'class' => 'privacy-policy',
+	'read_more' => setting('read-more')
   );
 // Merge Options
 $options = _ukMergeOptions($defaults, $options);
 
-return "
-<p id='$options[id]' class='$options[class]'>
-	<span data-uk-icon='icon:info; ratio:1.5'></span>&nbsp;
-	{$options['privacy_page']->meta_title}&nbsp;
-	<a href='{$options['privacy_page']->url}'>
-			$options[read_more]
-	</a>
-</p>
-";
+return "<span data-uk-icon='icon:info; ratio:1.5'></span>&nbsp;
+			{$options['privacy_page']->meta_title}&nbsp;
+			<a href='{$options['privacy_page']->url}'>
+					$options[read_more]
+			</a>";
 }
 
 /**
