@@ -5,7 +5,7 @@ $blogPosts = pages()->get("template=blog-posts")->children("limit=24");
 
 // no items found
 if( !count($blogPosts) ) {
-  	files()->include('views/blog/parts/_no-found.php',['items' => $blogPosts]);
+  	files()->include('views/blog/parts/_no-found.php');
 }
 ?>
 
