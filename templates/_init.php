@@ -79,6 +79,8 @@ setting([
 	'max-note' => __('%d more (not shown)', __FILE__),
 	'no-found' => __('No Items Found'),
 // Comments Form Translate
+	'previous-comments' => __('Previous Comments'),
+	'next-comments' => __('Next Comments'),
 	'post-comment' => __('Post a comment'),
 	'comment-text' => __('Comments'),
 	'success-message' => __('Thank you, your comment has been posted.'),

@@ -910,13 +910,25 @@ function ukBlogPosts(PageArray $posts, $options = array()) {
  */
 
 /**
+ * Render a comment repply
+ *
+ * @param int $commentId get comment id to set reply button url
+ *
+ */
+function commentReply($commentId) {
+	return "<a class='CommentActionReply uk-button uk-button-text'
+			data-comment-id='$commentId' href='#Comment$commentId'>Reply</a>";
+}
+
+/**
  * Render a ProcessWire comment using Uikit markup
  *
  * @param Comment $comment
+ * @param int $calculateDepth calculate comment depth
  * @return string
  *
  */
-function ukComment(Comment $comment) {
+function ukComment(Comment $comment, $calculateDepth) {
 
 	$text = $comment->getFormatted('text');
 	$cite = $comment->getFormatted('cite');
@@ -926,7 +938,10 @@ function ukComment(Comment $comment) {
 	$classes = array();
 	$metas = array();
 	$gravatar = '';
-	$replies = '';
+
+// Set reply button
+	$maxDepth = $comment->getField()->depth; // Max depth from field comments
+	$replies = $calculateDepth <= $maxDepth ? commentReply($comment->id) : '';
 
 	if($field->get('useGravatar')) {
 		$img = $comment->gravatar($field->get('useGravatar'), $field->get('useGravatarImageset'));
@@ -963,10 +978,9 @@ function ukComment(Comment $comment) {
 			<div class='uk-comment-body'>
 				$text
 			</div>
+			$replies
 		</article>
-		$replies
 	";
-
 	return $out;
 }
 
@@ -979,25 +993,44 @@ function ukComment(Comment $comment) {
  * @param CommentArray $comments
  * @param array|string $options Options to modify default behavior
  *  - `id` (string): HTML id attribute of the comments list (default='comments').
+ * @param int $calculateDepth calculate comment depth
  * @return string
  *
  */
-function ukComments(CommentArray $comments, $options = array()) {
+function ukComments(CommentArray $comments, $options = array(), $calculateDepth = 0) {
+
+	$out = '';
+
+	$calculateDepth++;
 
 	$defaults = array(
 		'id' => 'comments',
+		'ul' => true
 	);
 
 	if(!count($comments)) return '';
 	$options = _ukMergeOptions($defaults, $options);
 
-	$out = "<ul id='$options[id]' class='uk-comment-list'>";
+	if($options['ul']) $out .= "<ul id='$options[id]' class='uk-comment-list'>";
+
 
 	foreach($comments as $comment) {
-		$out .= "<li class='uk-margin'>" . ukComment($comment) . "</li>";
+
+		$out .= "<li class='uk-margin-small'>";
+
+		$out .= ukComment($comment, $calculateDepth);
+
+// Show comment children
+		if($comment->children) {
+			$out .= "<ul class='uk-nav-sub uk-margin-remove'>";
+			$out .= ukComments($comment->children, ['ul' => false], $calculateDepth);
+			$out .= '</ul>';
+		}
+
+		$out .= "</li>";
 	}
 
-	$out .= "</ul>";
+	if($options['ul']) $out .= "</ul>";
 
 	return $out;
 }
@@ -1018,15 +1051,15 @@ function ukCommentForm(CommentArray $comments, array $options = array()) {
 			'successMessage' => setting('success-message'),
 			'pendingMessage' => setting('pending-message'),
 			'errorMessage' => setting('error-message'),
-	     'labels' => array(
-	         'cite' => setting('comment-cite'),
-	         'email' => setting('comment-email'),
-	         'website' => setting('comment-website'),
-	         'stars' => setting('comment-stars'),
-	         'text' => setting('comment-text'),
-	         'submit' => setting('comment-submit'),
-	         'starsRequired' => setting('stars-required'),
-	 		 	)
+	    	'labels' => array(
+			'cite' => setting('comment-cite'),
+			'email' => setting('comment-email'),
+			'website' => setting('comment-website'),
+			'stars' => setting('comment-stars'),
+			'text' => setting('comment-text'),
+			'submit' => setting('comment-submit'),
+			'starsRequired' => setting('stars-required'),
+	 		)
 		);
 
 	$options = _ukMergeOptions($defaults, $options);
@@ -1040,6 +1073,7 @@ function ukCommentForm(CommentArray $comments, array $options = array()) {
 
 	$adjustments = array(
 		"<input type='text'" => "<input type='text' class='uk-input'",
+		"<input type='email'" => "<input type='email' class='uk-input'",
 		"<p class='CommentForm" => "<p class='uk-margin-remove-top CommentForm",
 		"<textarea " => "<textarea class='uk-textarea' ",
 		"<button " => "<button class='uk-button uk-button-primary' ",
