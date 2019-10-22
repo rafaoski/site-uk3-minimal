@@ -90,10 +90,7 @@ setting([
 	'comment-website' => __('Website'),
 	'comment-stars' => __('Your Rating'),
 	'comment-submit' => __('Submit'),
-	'stars-required' => __('Please select a star rating'),
-// Pagination Translate
-	'next' => __('Next'),
-	'previous' => __('Previous'),
+	'stars-required' => __('Please select a star rating')
 ]);
 
 include_once('./_func.php');
