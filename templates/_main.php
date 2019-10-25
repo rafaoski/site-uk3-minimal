@@ -61,7 +61,6 @@ if(page()->images && count(page()->images)) {
 
 	<!-- HERO -->
 	<div id="hero" class='hero uk-flex uk-flex-center uk-flex-middle uk-text-center uk-padding-small' data-uk-grid>
-
 		<?php
 			echo files()->render('views/template-parts/_hero-content.php',
 			[
@@ -69,7 +68,6 @@ if(page()->images && count(page()->images)) {
 				'img_alt' => $img_alt
 			])
 		?>
-
 	</div>
 
 	<!-- CONTENT -->
