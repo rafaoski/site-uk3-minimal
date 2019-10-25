@@ -690,7 +690,7 @@ function ukIcon($name, $options = array()) {
  * @return string
  *
  */
-function ukPagination(PageArray $items, $options = array()) {
+function ukPagination(WirePaginatable $items, $options = array()) {
 
 	$page = $items->wire('page');
 
@@ -994,6 +994,7 @@ function ukComment(Comment $comment, $calculateDepth) {
  * @param array|string $options Options to modify default behavior
  *  - `id` (string): HTML id attribute of the comments list (default='comments').
  * @param int $calculateDepth calculate comment depth
+ * @link https://processwire.com/talk/topic/21926-paginating-comments-using-pw-built-in-pagination-in-uikit-3-siteblog-profile/
  * @return string
  *
  */
@@ -1005,14 +1006,29 @@ function ukComments(CommentArray $comments, $options = array(), $calculateDepth 
 
 	$defaults = array(
 		'id' => 'comments',
-		'ul' => true
+		'ul' => true,
+		'paginate' => false,
+		'limit' => 9,
 	);
 
-	if(!count($comments)) return '';
 	$options = _ukMergeOptions($defaults, $options);
 
-	if($options['ul']) $out .= "<ul id='$options[id]' class='uk-comment-list'>";
+ 	if($options['paginate']) {
+ 		$limit = $options['limit'];
+ 		$start = (wire()->input->pageNum - 1) * $limit;
+ 		$total = $comments->count();
+ 		$comments = $comments->slice($start, $limit);
+ 		$comments->setLimit($limit);
+ 		$comments->setStart($start);
+ 		$comments->setTotal($total);
+ 	}
 
+// redirect to first pagination if accessed at an out-of-bounds pagination
+	if(input()->pageNum > 1 && !$comments->count) {
+		session()->redirect(page()->url);
+	}
+
+	if($options['ul']) $out .= "<ul id='$options[id]' class='uk-comment-list'>";
 
 	foreach($comments as $comment) {
 
@@ -1021,7 +1037,7 @@ function ukComments(CommentArray $comments, $options = array(), $calculateDepth 
 		$out .= ukComment($comment, $calculateDepth);
 
 // Show comment children
-		if($comment->children) {
+		if(count($comment->children)) {
 			$out .= "<ul class='uk-nav-sub uk-margin-remove'>";
 			$out .= ukComments($comment->children, ['ul' => false], $calculateDepth);
 			$out .= '</ul>';
@@ -1031,6 +1047,10 @@ function ukComments(CommentArray $comments, $options = array(), $calculateDepth 
 	}
 
 	if($options['ul']) $out .= "</ul>";
+
+	if($options['paginate'] && $comments->getTotal() > $comments->count()) {
+ 		$out .= ukPagination($comments);
+	 }
 
 	return $out;
 }
@@ -1044,7 +1064,6 @@ function ukComments(CommentArray $comments, $options = array(), $calculateDepth 
  *
  */
 function ukCommentForm(CommentArray $comments, array $options = array()) {
-
 
 		$defaults = array(
 			'headline' => "",
