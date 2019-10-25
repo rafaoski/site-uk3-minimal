@@ -7,7 +7,7 @@ $authText = setting('authors');
 <!-- CATEGORIES -->
 <?php
 $categories = pages()->get("template=blog-categories");
-echo ukNav($categories->children('limit=9'),
+echo ukNav($categories->children('start=0, limit=9'),
 	[
 		'heading' => ukHeading3($categories->title, ['line' => 'left','class' => 'uk-h2']),
 		'linkClass' => 'uk-button uk-button-text uk-text-left',
@@ -17,7 +17,7 @@ echo ukNav($categories->children('limit=9'),
 
 <!-- /RECENT POSTS -->
 <?php
-echo ukNav(page()->parent->children('limit=6'),
+echo ukNav(page()->parent->children('start=0, limit=6'),
 	[
 		'heading' => ukHeading3(setting('recent-posts'), ['line' => 'left','class' => 'uk-h2']),
 		'class' => 'uk-margin-medium-top',
@@ -49,7 +49,7 @@ echo ukNav(page()->parent->children('limit=6'),
 // You should change the authors url slug in the _init.php file ( 'authors' => __('Authors') ) if the page has a different name than the authors
 $authorsUrlSlug = sanitizer()->pageName($authText, true);
 $authUrl = pages()->get("template=blog")->url . $authorsUrlSlug;
-$blogAuthors = users()->find("nick_name!='', nick_pagename!='', limit=12");
+$blogAuthors = users()->find("nick_name!='', nick_pagename!='', start=0, limit=12");
 // $blogAuthors = pages()->find("template=user, nick_name!='', nick_pagename!='', include=all, limit=2");
 ?>
 <ul class="uk-nav uk-nav-default uk-margin-medium-top">
@@ -78,7 +78,7 @@ $blogAuthors = users()->find("nick_name!='', nick_pagename!='', limit=12");
 <!-- TAGS -->
 <?php
 $tags = pages()->get("template=blog-tags");
-echo ukNav($tags->children('limit=9'),
+echo ukNav($tags->children('start=0, limit=9'),
 	[
 		'heading' => ukHeading3($tags->title . '/ ', ['line' => 'left','class' => 'uk-h2']),
 		'type' => 'primary',
