@@ -917,7 +917,7 @@ function ukBlogPosts(PageArray $posts, $options = array()) {
  */
 function commentReply($commentId) {
 	return "<a class='CommentActionReply uk-button uk-button-text'
-			data-comment-id='$commentId' href='#Comment$commentId'>Reply</a>";
+			data-comment-id='$commentId' href='#Comment$commentId'>".__('Reply')."</a>";
 }
 
 /**
